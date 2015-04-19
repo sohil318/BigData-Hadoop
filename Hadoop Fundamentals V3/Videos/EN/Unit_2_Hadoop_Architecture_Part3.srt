@@ -1,0 +1,565 @@
+﻿1
+00:00:02,010 --> 00:00:06,760
+Let’s talk about some IBM distinctives that
+come with BigInsights. The bulk of
+
+2
+00:00:06,760 --> 00:00:13,260
+BigInsights are the Hadoop open source components.
+But there are some components of
+
+3
+00:00:13,260 --> 00:00:20,250
+BigInsights that are unique to IBM. The BigInsights
+Console is an IBM distinctive. And
+
+4
+00:00:20,250 --> 00:00:27,250
+so is GPFS – FPO and Adaptive MapReduce.
+GPFS – FPO is General Parallel File
+
+5
+00:00:31,050 --> 00:00:38,050
+System – File Placement Option. It is a
+replacement for HDFS. Adaptive MapReduce is
+
+6
+00:00:39,539 --> 00:00:46,539
+designed to better performance and availability
+when compared to Apache MapReduce.
+
+7
+00:00:47,350 --> 00:00:53,069
+Both of these components are options to be
+installed during the installation of
+
+8
+00:00:53,069 --> 00:01:00,069
+BigInsights.
+GPFS was originally developed for SAN file
+
+9
+00:01:00,229 --> 00:01:07,229
+systems. It is able to handle thousands of
+node and petabytes of storage all with high
+
+10
+00:01:07,930 --> 00:01:14,820
+performance. It is POSIX compliant and has
+the following enterprise features:
+
+11
+00:01:14,820 --> 00:01:18,320
+• Security
+• Access Control Lists (ACLs)
+
+12
+00:01:18,320 --> 00:01:21,010
+• Snapshots
+• Backup and restore
+
+13
+00:01:21,010 --> 00:01:23,820
+• Archiving
+• Caching
+
+14
+00:01:23,820 --> 00:01:30,270
+• Replication
+It has workload isolation, meaning that you
+
+15
+00:01:30,270 --> 00:01:36,480
+can define storage pools to make sure that
+data for a particular application only resides
+
+16
+00:01:36,480 --> 00:01:43,480
+on specific nodes. This also allows you to
+treat individual sets of data differently.
+
+17
+00:01:43,680 --> 00:01:48,090
+In Hadoop, using HDFS, all data is treated
+the
+
+18
+00:01:48,090 --> 00:01:54,390
+same. HDFS is designed to spread the data
+in each file to every node in the cluster
+
+19
+00:01:54,390 --> 00:01:58,560
+and to
+replicate all data the same way. For that
+
+20
+00:01:58,560 --> 00:02:01,710
+reason, a local file system is required to
+store
+
+21
+00:02:01,710 --> 00:02:08,710
+temporary data. But the storage pool capabilities
+in GPFS, allow you to have just a single
+
+22
+00:02:09,030 --> 00:02:14,849
+file system since not all of your data has
+to be treated the same.
+
+23
+00:02:14,849 --> 00:02:21,359
+GPFS, as originally developed for SAN environments,
+assumed that data was going to be
+
+24
+00:02:21,359 --> 00:02:28,359
+stored on network devices and that access
+to all data would be across the network. That
+
+25
+00:02:28,549 --> 00:02:34,479
+is
+not an ideal situation for Hadoop. So GPFS
+
+26
+00:02:34,479 --> 00:02:41,479
+- FPO was developed. Based upon GPFS, it
+was adapted to a shared nothing cluster environment
+
+27
+00:02:42,909 --> 00:02:48,310
+where locality of data was important
+and the failure of components would be fairly
+
+28
+00:02:48,310 --> 00:02:55,310
+common.
+GPFS - FPO allows different block sizes. Hadoop
+
+29
+00:02:55,650 --> 00:03:00,760
+was originally conceived to process
+huge amounts of machine logging data. And
+
+30
+00:03:00,760 --> 00:03:03,269
+then it was adopted to process other types
+of
+
+31
+00:03:03,269 --> 00:03:10,269
+large amounts of data. Since the data was
+being processed sequentially, block sizes
+
+32
+00:03:10,510 --> 00:03:16,819
+of
+64MB or 128MB were used to limit the overhead
+
+33
+00:03:16,819 --> 00:03:23,819
+of starting and stopping MapReduce
+tasks. Large block sizes also had the effect
+
+34
+00:03:24,019 --> 00:03:30,540
+of lessening the metadata stored in the
+NameNode. Initially it made sense to define
+
+35
+00:03:30,540 --> 00:03:33,439
+a single block size for the entire Hadoop
+file
+
+36
+00:03:33,439 --> 00:03:40,439
+system. But as Hadoop is applied to different
+types of analysis, the files being process
+
+37
+00:03:40,599 --> 00:03:43,709
+are
+not necessarily very large. To force these
+
+38
+00:03:43,709 --> 00:03:50,709
+files into a single block sizes of 64MB or
+128MB may not be prudent.
+
+39
+00:03:51,379 --> 00:03:58,379
+GPFS - FPO introduces the concept of a block
+group factor. Now you can define your
+
+40
+00:03:59,769 --> 00:04:06,769
+block size appropriately to handle small files
+or index lookup files. But then, using the
+
+41
+00:04:08,319 --> 00:04:15,319
+block group factor, you can group a number
+of blocks together for a larger effective
+
+42
+00:04:15,629 --> 00:04:19,440
+block
+size. With this approach files can have their
+
+43
+00:04:19,440 --> 00:04:26,440
+own block size and are not forced to use a
+system-wide block size, although it is possible
+
+44
+00:04:27,160 --> 00:04:31,020
+to define a system-wide block group
+factor.
+
+45
+00:04:31,020 --> 00:04:38,020
+GPFS - FPO does not use a NameNode, like you
+see with HDFS. The NameNode in
+
+46
+00:04:39,190 --> 00:04:45,870
+HDFS is a single point of failure. Rather,
+GPFS - FPO distributes the metadata across
+
+47
+00:04:45,870 --> 00:04:52,470
+multiple nodes so that there is not a single
+point of failure. The metadata needs to be
+
+48
+00:04:52,470 --> 00:04:58,320
+treated differently than the normal Hadoop
+data. As it turns out, metadata is better
+
+49
+00:04:58,320 --> 00:05:02,820
+suited
+for the way that regular GPFS handles data,
+
+50
+00:05:02,820 --> 00:05:09,820
+whereas the normal Hadoop data is better
+handled by the features of GPFS - FPO. So
+
+51
+00:05:10,220 --> 00:05:17,100
+how do you get around this? Well GPFS -
+FPO has the concept of storage pools. Because
+
+52
+00:05:17,100 --> 00:05:21,630
+of that, you can treat sets of data
+differently. Metadata should be assigned to
+
+53
+00:05:21,630 --> 00:05:27,910
+a storage pool with a property of no write
+affinity. And the normal Hadoop data should
+
+54
+00:05:27,910 --> 00:05:33,470
+be assigned to a storage pool with a
+property of write affinity.
+
+55
+00:05:33,470 --> 00:05:40,470
+Let’s talk about the GPFS cluster and file
+system concepts. In this visual, there are
+
+56
+00:05:42,460 --> 00:05:47,010
+three
+nodes that have metadata and all nodes can
+
+57
+00:05:47,010 --> 00:05:54,010
+have application data. There are also three
+nodes that participate in the quorum. (Quorum
+
+58
+00:05:54,210 --> 00:05:59,580
+nodes are specified by you.) Depending on
+the size of the cluster, there can be as many
+
+59
+00:05:59,580 --> 00:06:06,020
+as seven quorum nodes. If there are any
+detected problems, the quorum members do something
+
+60
+00:06:06,020 --> 00:06:10,970
+about it. For example, assume
+that there was a problem with the File System
+
+61
+00:06:10,970 --> 00:06:17,330
+Manager node. The quorum members
+would elect a new FSM. The same thing would
+
+62
+00:06:17,330 --> 00:06:22,990
+happen with the Cluster Manger. If the
+Primary Configuration Server were to go offline,
+
+63
+00:06:22,990 --> 00:06:27,000
+then the quorum members would tell
+the Secondary Configuration Server to take
+
+64
+00:06:27,000 --> 00:06:32,240
+over as the primary.
+We talked about there not being a NameNode
+
+65
+00:06:32,240 --> 00:06:38,710
+to act as a single point of failure. In a
+GPFS system, each node is able to access data
+
+66
+00:06:38,710 --> 00:06:45,710
+that is on another node. So the replicated
+metadata is accessible by all nodes. Even
+
+67
+00:06:46,520 --> 00:06:53,520
+if a node that has metadata fails, that same
+metadata can be read from another node.
+
+68
+00:06:54,270 --> 00:07:01,250
+What happens if a quorum node fails? As long
+as there is a quorum (more than half of the
+
+69
+00:07:01,250 --> 00:07:08,250
+number of quorum nodes), the system can continue
+to run. One of the purposes for the
+
+70
+00:07:08,990 --> 00:07:14,240
+quorum nodes is to make sure that the system
+does not get into what is referred to as a
+
+71
+00:07:14,240 --> 00:07:20,960
+split brain situation. What if the switch
+failed? Now you have quorum members that
+
+72
+00:07:20,960 --> 00:07:25,800
+cannot communicate with other members. You
+surely do not want to have both racks
+
+73
+00:07:25,800 --> 00:07:31,460
+doing updates independently of each other,
+each acting as though they are the only brain.
+
+74
+00:07:31,460 --> 00:07:36,890
+So in this scenario, the quorum member on
+rack 1 would not be able to communicate
+
+75
+00:07:36,890 --> 00:07:42,830
+with the members on rack 2. The quorum members
+on rack 2 can still communicated with
+
+76
+00:07:42,830 --> 00:07:48,650
+each other so they have a quorum and continue
+to process. The quorum member on rack
+
+77
+00:07:48,650 --> 00:07:53,950
+1 determines that it is all alone and does
+not have a quorum. It then shuts down.
+
+78
+00:07:53,950 --> 00:07:54,200
+Let’s look at emerging workload patterns.
+Although Hadoop and MapReduce are batch
+
+79
+00:07:53,950 --> 00:07:54,200
+oriented, there is a greater desire for near
+real time analytics. There are already a number
+
+80
+00:07:53,950 --> 00:07:54,200
+of program languages, like Pig and Jaql available
+in the Hadoop arena that simplify the
+
+81
+00:07:54,020 --> 00:07:54,440
+coding of MapReduce applications. What you
+code in a high level language gets distilled,
+
+82
+00:07:54,440 --> 00:07:54,860
+under the covers, into MapReduce programs.
+Taking that farther, you have SQL access to
+
+83
+00:07:54,860 --> 00:07:55,370
+Hadoop data in the form of Hive and Big SQL
+that also convert the high level SQL
+
+84
+00:07:55,370 --> 00:07:55,700
+statements into MapReduce programs. When using
+these languages, programmers do not
+
+85
+00:07:55,700 --> 00:07:56,250
+want to wait five to ten minutes for the results
+of a query. If you are querying multiple
+
+86
+00:07:56,250 --> 00:07:56,760
+terabytes of data, then you can expect to
+wait on your results. But Hadoop is now being
+
+87
+00:07:56,760 --> 00:07:57,240
+used for files that are much smaller in size.
+As queries are run against smaller datasets,
+
+88
+00:07:57,240 --> 00:07:57,540
+the overhead of Apache MapReduce becomes more
+noticeable. BigInsights' Adaptive
+
+89
+00:07:57,540 --> 00:07:57,810
+MapReduce is designed to address that type
+of problem.
+
+90
+00:07:57,810 --> 00:08:04,680
+One of the goals for Adaptive MapReduce is
+for low latency task scheduling. The default
+
+91
+00:08:04,680 --> 00:08:11,680
+for task scheduling for Apache MapReduce is
+30 seconds. This involves the TaskTacker
+
+92
+00:08:12,730 --> 00:08:18,310
+contacting the JobTracker to see if there
+is a workload on which it can work. If there
+
+93
+00:08:18,310 --> 00:08:21,760
+is
+not, then the TaskTracker will wait another
+
+94
+00:08:21,760 --> 00:08:28,760
+30 seconds to check to see if there is any
+work for it. With Adaptive MapReduce the model
+
+95
+00:08:28,780 --> 00:08:33,979
+changes from a pull model, where the
+TaskTracker is pulling scheduling information
+
+96
+00:08:33,979 --> 00:08:38,830
+from the JobTracker, to a push model,
+where the scheduling information is pushed
+
+97
+00:08:38,830 --> 00:08:45,630
+from a central location to the workers. Where
+you have small job workloads, with Apache
+
+98
+00:08:45,630 --> 00:08:52,630
+MapReduce, you would have a lot of starts
+and stops by the TaskTrackers. The Adaptive
+
+99
+00:08:53,750 --> 00:09:00,150
+MapReduce approach allows a single
+TaskTracker, after once starting, to keep
+
+100
+00:09:00,150 --> 00:09:07,050
+working on multiple tasks.
+A second part of Adaptive MapReduce is the
+
+101
+00:09:07,050 --> 00:09:13,510
+redesigning of the shuffling algorithm. The
+new algorithm will, when possible, skip data
+
+102
+00:09:13,510 --> 00:09:19,460
+being spilled to disk before the data is
+passed to the reduce task.
+
+103
+00:09:19,460 --> 00:09:25,980
+There is also higher availability with Adaptive
+MapReduce. With Apache MapReduce,
+
+104
+00:09:25,980 --> 00:09:31,180
+the workload scheduling and the resource scheduling
+are two different layers but they are
+
+105
+00:09:31,180 --> 00:09:37,170
+tightly coupled. (The TaskTracker sends it
+current state back to the JobTracker and the
+
+106
+00:09:37,170 --> 00:09:43,450
+JobTracker decides how to dispatch the workloads.)
+Adaptive MapReduce separates
+
+107
+00:09:43,450 --> 00:09:49,640
+these two layers. The worker nodes report
+back to the central site that they are available
+
+108
+00:09:49,640 --> 00:09:56,640
+for work. The workload scheduler then pushes
+out the workload to any idle worker nodes.
+
+109
+00:09:57,100 --> 00:10:03,010
+This allows the central site to have the status
+of all worker nodes and therefore the central
+
+110
+00:10:03,010 --> 00:10:10,010
+site, if need be, can be moved to another
+node in the cluster. In this way, it reduces
+
+111
+00:10:10,610 --> 00:10:16,240
+the
+single point of failure for the JobTracker.
+
+112
+00:10:16,240 --> 00:10:23,240
+This all was accomplished with staying Apache
+MapReduce compatible.
+
+113
+00:10:23,430 --> 00:10:26,580
+Please continue with the next video in this
+lesson.
+

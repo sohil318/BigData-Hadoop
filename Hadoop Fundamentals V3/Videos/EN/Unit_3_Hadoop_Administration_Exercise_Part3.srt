@@ -1,0 +1,279 @@
+1
+00:00:01,010 --> 00:00:04,710
+and so now let's look at checking the
+health of our system
+
+2
+00:00:04,710 --> 00:00:09,139
+a real easy way of doing this is through
+the
+
+3
+00:00:09,139 --> 00:00:14,490
+BigInsights console you know we can
+take a look at all the components see
+
+4
+00:00:14,490 --> 00:00:15,960
+whether they're running or not
+
+5
+00:00:15,960 --> 00:00:20,090
+we can take a look at our nodes see if
+they're running or not matter of fact
+
+6
+00:00:20,090 --> 00:00:24,750
+for example by clicking on MapReduce we
+can go in and we can start or stop
+
+7
+00:00:24,750 --> 00:00:28,670
+task trackers from HDFS we can go in
+
+8
+00:00:28,670 --> 00:00:34,960
+and start or stop data nodes thing like
+Big SQL
+
+9
+00:00:34,960 --> 00:00:38,530
+we can actually start or stop Big SQL
+
+10
+00:00:38,530 --> 00:00:42,930
+and then there's the
+
+11
+00:00:42,930 --> 00:00:47,770
+command line one of the things that
+
+12
+00:00:47,770 --> 00:00:51,949
+you might want to do is check and see
+how much space is available
+
+13
+00:00:51,949 --> 00:00:55,920
+on each of your nodes so if you execute
+
+14
+00:00:55,920 --> 00:00:59,030
+hadoop dfsadmin -report
+
+15
+00:00:59,030 --> 00:01:03,730
+it will come back with
+
+16
+00:01:03,730 --> 00:01:10,730
+a report on each the nodes now if you'll
+notice
+
+17
+00:01:12,990 --> 00:01:16,270
+we still have node bivm3 there
+
+18
+00:01:16,270 --> 00:01:20,680
+but it's been decommissioned but for the
+other nodes you can see how much space
+
+19
+00:01:20,680 --> 00:01:21,909
+has been used
+
+20
+00:01:21,909 --> 00:01:26,000
+what percentage is remaining and
+something that you ought to check on
+
+21
+00:01:26,000 --> 00:01:26,960
+periodically
+
+22
+00:01:26,960 --> 00:01:32,470
+we just looked
+
+23
+00:01:32,470 --> 00:01:36,770
+at starting and stopping components
+using the
+
+24
+00:01:36,770 --> 00:01:41,250
+BigInsights console you can also do
+that
+
+25
+00:01:41,250 --> 00:01:44,659
+from the command line now initially we
+started
+
+26
+00:01:44,659 --> 00:01:50,180
+all of the components from the command line
+but you can start and stop individual
+
+27
+00:01:50,180 --> 00:01:51,799
+components for example like
+
+28
+00:01:51,799 --> 00:01:57,399
+Hadoop and Oozie or
+
+29
+00:01:57,399 --> 00:02:04,399
+Hadoop and the console
+
+30
+00:02:09,270 --> 00:02:12,660
+and then you
+
+31
+00:02:12,660 --> 00:02:16,760
+also need to be able
+
+32
+00:02:16,760 --> 00:02:19,830
+or be aware of making
+modifications
+
+33
+00:02:19,830 --> 00:02:23,350
+to the parameters
+
+34
+00:02:23,350 --> 00:02:26,750
+that Hadoop uses
+
+35
+00:02:26,750 --> 00:02:30,350
+and those parameters in BigInsights are
+found in
+
+36
+00:02:30,350 --> 00:02:33,410
+underneath the /home/hdm/hadoop-conf-staging
+
+37
+00:02:33,410 --> 00:02:37,270
+ 
+
+38
+00:02:37,270 --> 00:02:42,150
+we make changes to these
+
+39
+00:02:42,150 --> 00:02:46,530
+staging files here's the hdfs-site
+
+40
+00:02:46,530 --> 00:02:51,510
+here's the core-site and somewhere
+on here
+
+41
+00:02:51,510 --> 00:02:55,280
+is the there it is the map reduce the
+mapred-site
+
+42
+00:02:55,280 --> 00:03:00,290
+files that had the various
+parameters in there for those different
+
+43
+00:03:00,290 --> 00:03:01,040
+components
+
+44
+00:03:01,040 --> 00:03:06,080
+if we edit hdfs-site.xml
+
+45
+00:03:06,080 --> 00:03:09,180
+we can see the
+
+46
+00:03:09,180 --> 00:03:13,860
+the different parameters that we can
+make changes to here's
+
+47
+00:03:13,860 --> 00:03:17,620
+dfs-blocksize you want to change that from the
+
+48
+00:03:17,620 --> 00:03:21,340
+128 megabytes that BigInsights defaults
+to
+
+49
+00:03:21,340 --> 00:03:27,680
+Hadoop defaults to 64 scroll down we see
+here's our
+
+50
+00:03:27,680 --> 00:03:32,860
+dfs-replication it's been set to a value
+of 2
+
+51
+00:03:32,860 --> 00:03:39,690
+well that's because we've got two data nodes
+and if we scroll further on down we can
+
+52
+00:03:39,690 --> 00:03:41,310
+find the
+
+53
+00:03:41,310 --> 00:03:44,960
+the
+
+54
+00:03:44,960 --> 00:03:50,630
+dfs.datanode.du.reserved
+you know how much space we're going to
+
+55
+00:03:50,630 --> 00:03:51,590
+maintain
+
+56
+00:03:51,590 --> 00:03:58,590
+for other systems now when you make
+changes to any of these
+
+57
+00:03:58,910 --> 00:04:02,610
+configuration files once again these
+are
+
+58
+00:04:02,610 --> 00:04:06,060
+in the staging directory you need to
+then
+
+59
+00:04:06,060 --> 00:04:10,600
+go to the $BIGINSIGHTS/bin
+directory
+
+60
+00:04:10,600 --> 00:04:14,940
+and you execute the sink configuration
+or the sink.conf
+
+61
+00:04:14,940 --> 00:04:19,430
+script and this will then push those
+changes out to
+
+62
+00:04:19,430 --> 00:04:20,310
+all of the nodes
+

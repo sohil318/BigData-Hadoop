@@ -1,0 +1,330 @@
+1
+00:00:00,890 --> 00:00:07,890
+Here is a list of some other open source projects
+related to Hadoop:
+
+2
+00:00:08,380 --> 00:00:14,850
+Eclipse is a popular IDE donated by IBM to
+the open source community.
+
+3
+00:00:14,850 --> 00:00:21,850
+Lucene is a text search engine library written
+in Java.
+
+4
+00:00:22,300 --> 00:00:29,300
+Hbase is the Hadoop database.
+Hive provides data warehousing tools to extract,
+
+5
+00:00:30,060 --> 00:00:35,250
+transform and load
+data, and then, query this data stored in
+
+6
+00:00:35,250 --> 00:00:39,480
+Hadoop files.
+Pig is a high level language that generates
+
+7
+00:00:39,480 --> 00:00:42,899
+MapReduce code to analyze
+large data sets.
+
+8
+00:00:42,899 --> 00:00:49,469
+Jaql is a query language for JavaScript open
+notation.
+
+9
+00:00:49,469 --> 00:00:54,640
+ZooKeeper is a centralized configuration service
+and naming registry for
+
+10
+00:00:54,640 --> 00:01:01,640
+large distributed systems.
+Avro is a data serialization system.
+
+11
+00:01:01,850 --> 00:01:08,210
+UIMA is the architecture for the development,
+discovery, composition
+
+12
+00:01:08,210 --> 00:01:14,229
+and deployment for the analysis of unstructured
+data.
+
+13
+00:01:14,229 --> 00:01:19,250
+Let’s now talk about examples of Hadoop
+in action.
+
+14
+00:01:19,250 --> 00:01:24,850
+Early in 2011, Watson, a super computer developed
+by IBM competed
+
+15
+00:01:24,850 --> 00:01:31,850
+in the popular Question and Answer show Jeopardy.
+In that contest, Watson was successful in
+
+16
+00:01:33,170 --> 00:01:38,360
+beating the two most winning
+Jeopardy players.
+
+17
+00:01:38,360 --> 00:01:45,219
+Approximately 200 million pages of text were
+input using Hadoop to
+
+18
+00:01:45,219 --> 00:01:50,960
+distribute the workload for loading this information
+into memory.
+
+19
+00:01:50,960 --> 00:01:54,320
+Once the information was loaded, Watson used
+other technologies for
+
+20
+00:01:54,320 --> 00:02:01,320
+advanced search and analysis.
+In the telecommunications industry we have
+
+21
+00:02:02,340 --> 00:02:07,770
+China Mobile, a company
+that built a Hadoop cluster to perform data
+
+22
+00:02:07,770 --> 00:02:14,770
+mining on Call Data Records.
+China Mobile was producing 5-8TB of these
+
+23
+00:02:15,510 --> 00:02:22,510
+records daily. By using a
+Hadoop-based system they were able to process
+
+24
+00:02:23,040 --> 00:02:27,569
+10 times as much data
+as when using their old system, and at one
+
+25
+00:02:27,569 --> 00:02:33,170
+fifth of the cost.
+In the media we have the New York Times which
+
+26
+00:02:33,170 --> 00:02:37,260
+wanted to host on
+their website all public domain articles from
+
+27
+00:02:37,260 --> 00:02:44,260
+1851 to 1922.
+They converted articles from 11 million image
+
+28
+00:02:44,360 --> 00:02:51,360
+files to 1.5TB of PDF
+documents. This was implemented by one employee
+
+29
+00:02:52,739 --> 00:02:59,260
+who ran a job in 24
+hours on a 100-instance Amazon EC2 Hadoop
+
+30
+00:02:59,260 --> 00:03:06,260
+cluster at a very low cost.
+In the technology field we again have IBM
+
+31
+00:03:06,400 --> 00:03:13,400
+with IBM ES2, an enterprise
+search technology based on Hadoop, Lucene
+
+32
+00:03:13,720 --> 00:03:18,980
+and Jaql.
+ES2 is designed to address unique challenges
+
+33
+00:03:18,980 --> 00:03:25,689
+of enterprise search such
+as the use of an enterprise specific vocabulary,
+
+34
+00:03:25,689 --> 00:03:29,129
+abbreviations and
+acronyms.
+
+35
+00:03:29,129 --> 00:03:35,019
+ES2 can perform mining tasks to build acronym
+libraries, regular
+
+36
+00:03:35,019 --> 00:03:40,689
+expression patterns, and geoclassification
+rules.
+
+37
+00:03:40,689 --> 00:03:45,530
+There are also many internet or social network
+companies using Hadoop
+
+38
+00:03:45,530 --> 00:03:52,530
+such as Yahoo, Facebook, Amazon, eBay, Twitter,
+StumbleUpon,
+
+39
+00:03:53,400 --> 00:04:00,400
+Rackspace, Ning, AOL, and so on.
+Yahoo is, of course, the largest production
+
+40
+00:04:01,939 --> 00:04:07,930
+user with an application
+running a Hadoop cluster consisting of approximately
+
+41
+00:04:07,930 --> 00:04:11,489
+10,000 Linux
+machines.
+
+42
+00:04:11,489 --> 00:04:17,960
+Yahoo is also the largest contributor to the
+Hadoop open source project.
+
+43
+00:04:17,960 --> 00:04:24,960
+Now, Hadoop is not a magic bullet that solves
+all kinds of problems.
+
+44
+00:04:25,120 --> 00:04:29,380
+Hadoop is not good to process transactions
+due to its lack random
+
+45
+00:04:29,380 --> 00:04:34,480
+access.
+It is not good when the work cannot be parallelized
+
+46
+00:04:34,480 --> 00:04:38,460
+or when there are
+dependencies within the data, that is, record
+
+47
+00:04:38,460 --> 00:04:42,860
+one must be processed
+before record two.
+
+48
+00:04:42,860 --> 00:04:49,560
+It is not good for low latency data access.
+Not good for processing lots of small files
+
+49
+00:04:49,560 --> 00:04:53,880
+although there is work being
+done in this area, for example, IBM’s Adaptive
+
+50
+00:04:53,880 --> 00:04:58,650
+MapReduce.
+And it is not good for intensive calculations
+
+51
+00:04:58,650 --> 00:05:03,870
+with little data.
+Now let’s move on, and talk about Big Data
+
+52
+00:05:03,870 --> 00:05:10,000
+solutions.
+Big Data solutions are more than just Hadoop.
+
+53
+00:05:10,000 --> 00:05:13,970
+They can integrate
+analytic solutions to the mix to derive valuable
+
+54
+00:05:13,970 --> 00:05:19,700
+information that can
+combine structured legacy data with new unstructured
+
+55
+00:05:19,700 --> 00:05:24,130
+data.
+Big data solutions may also be used to derive
+
+56
+00:05:24,130 --> 00:05:27,050
+information from data in
+motion.
+
+57
+00:05:27,050 --> 00:05:31,090
+For example, IBM has a product called InfoSphere
+Streams that can be
+
+58
+00:05:31,090 --> 00:05:36,440
+used to quickly determine customer sentiment
+for a new product based
+
+59
+00:05:36,440 --> 00:05:42,560
+on Facebook or Twitter comments.
+Finally, let’s end this presentation with
+
+60
+00:05:42,560 --> 00:05:47,770
+one final thought: Cloud
+computing has gained a tremendous track in
+
+61
+00:05:47,770 --> 00:05:54,270
+the past few years, and it is
+a perfect fit for Big Data solutions.
+
+62
+00:05:54,270 --> 00:05:58,900
+Using the cloud, a Hadoop cluster can be setup
+in minutes, on demand,
+
+63
+00:05:58,900 --> 00:06:03,100
+and it can run for as long as is needed without
+having to pay for more
+
+64
+00:06:03,100 --> 00:06:08,340
+than what is used.
+This is the end of this video. Thank you for
+
+65
+00:06:08,340 --> 00:06:14,610
+watching. Please continue
+with the other units in this course.
+
+66
+00:06:14,610 --> 00:06:20,820
+Here is a list of trademarks that may have
+been used in this presentation.
+

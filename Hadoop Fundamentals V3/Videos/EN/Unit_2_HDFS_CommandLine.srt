@@ -1,0 +1,368 @@
+1
+00:00:01,100 --> 00:00:08,100
+Welcome to HDFS command line interface.
+In this presentation, I will cover the general
+
+2
+00:00:09,000 --> 00:00:16,000
+usage of the HDFS command line
+interface and commands specific to HDFS. Other
+
+3
+00:00:17,420 --> 00:00:24,420
+commands should be familiar to
+anyone with UNIX experience and will not be
+
+4
+00:00:24,789 --> 00:00:31,190
+covered.
+The HDFS can be manipulated through a Java
+
+5
+00:00:31,190 --> 00:00:38,190
+API or through a command line
+interface. All commands for manipulating HDFS
+
+6
+00:00:38,420 --> 00:00:45,420
+through Hadoop's command line
+interface begin with "hadoop", a space, and
+
+7
+00:00:46,979 --> 00:00:52,629
+"fs". This is the file system shell. This
+is
+
+8
+00:00:52,629 --> 00:00:59,629
+followed by the command name as an argument
+to "hadoop fs". These commands
+
+9
+00:01:01,729 --> 00:01:08,520
+start with a dash. For example, the "ls" command
+for listing a directory is a common
+
+10
+00:01:08,520 --> 00:01:15,520
+UNIX command and is preceded with a dash.
+As on UNIX systems, ls can take a
+
+11
+00:01:16,920 --> 00:01:22,490
+path as an argument. In this example, the
+path is the current directory, represented
+
+12
+00:01:22,490 --> 00:01:29,109
+by a single dot.
+So I have already started the various Hadoop
+
+13
+00:01:29,109 --> 00:01:36,109
+components and I just want to demonstrate
+quickly using the Hadoop file system shell.
+
+14
+00:01:39,640 --> 00:01:46,640
+So we will execute Hadoop fs – and we will
+do a list of the current directory. And this
+
+15
+00:01:54,719 --> 00:01:59,020
+is obviously the current directory in HDFS.
+Or
+
+16
+00:01:59,020 --> 00:02:06,020
+if we wanted to pass in a different path…
+This gives you a little bit of the concept
+
+17
+00:02:19,220 --> 00:02:25,390
+of
+executing the Hadoop file shell.
+
+18
+00:02:25,390 --> 00:02:29,670
+As we saw for the "ls" command, the file system
+shell commands can take paths as
+
+19
+00:02:29,670 --> 00:02:36,670
+arguments. These paths can be expressed in
+the form of uniform resource identifiers
+
+20
+00:02:36,730 --> 00:02:43,730
+or URIs. The URI format consists of a scheme,
+an authority, and path. There are
+
+21
+00:02:45,640 --> 00:02:52,640
+multiple schemes supported. The local file
+system has a scheme of "file". HDFS has
+
+22
+00:02:53,740 --> 00:03:00,740
+a scheme called "hdfs". For example, let us
+say you wish to copy a file called
+
+23
+00:03:02,580 --> 00:03:09,580
+"myfile.txt" from your local filesystem to
+an HDFS file system on the localhost. You
+
+24
+00:03:11,650 --> 00:03:17,010
+can do this by issuing the command shown.
+The cp command takes a
+
+25
+00:03:17,010 --> 00:03:23,540
+URI for the source and a URI for the destination.
+The scheme and the authority do
+
+26
+00:03:23,540 --> 00:03:30,350
+not always need to be specified. Instead you
+may rely on their default values. These
+
+27
+00:03:30,350 --> 00:03:37,350
+defaults can be overridden by specifying them
+in a file named core-site.xml in the
+
+28
+00:03:41,030 --> 00:03:48,030
+conf directory of your Hadoop installation.
+So now let’s do another example. This time
+
+29
+00:03:50,690 --> 00:03:57,690
+we will us the copy command and the
+various schemes that we just talked about.
+
+30
+00:03:59,820 --> 00:04:06,820
+So hadoop fs - cp and I am going to copy
+from my biadmin home directory 
+
+31
+00:04:25,210 --> 00:04:32,210
+to HDFS. And let’s see the results. And
+we can now see
+
+32
+00:05:15,070 --> 00:05:22,070
+myfile.txt as having been uploaded to HDFS.
+HDFS supports many POSIX-like commands. HDFS
+
+33
+00:05:32,360 --> 00:05:35,790
+is not a fully POSIX compliant
+file system, but it supports many of the commands.
+
+34
+00:05:35,790 --> 00:05:40,060
+The HDFS commands are
+mostly easily-recognized UNIX commands like
+
+35
+00:05:40,060 --> 00:05:47,060
+cat and chmod. There are also a few
+commands that are specific to HDFS such as
+
+36
+00:05:47,280 --> 00:05:54,280
+copyFromLocal. We'll examine a few
+of these.
+
+37
+00:05:55,550 --> 00:06:02,550
+copyFromLocal and put are two HDFS-specific
+commands that do the same thing -
+
+38
+00:06:03,639 --> 00:06:09,930
+copy files from the local filesystem to a
+location on another filesystem.
+
+39
+00:06:09,930 --> 00:06:16,930
+Their opposite is the copyToLocal command
+which can also be referred to as get.
+
+40
+00:06:17,330 --> 00:06:23,650
+This command copies files out of the filesystem
+you specify and into the local
+
+41
+00:06:23,650 --> 00:06:29,650
+filesystem.
+getMerge is an enhanced form of get that can
+
+42
+00:06:29,650 --> 00:06:36,650
+merge the files from multiple locations
+into a single local file.
+
+43
+00:06:37,560 --> 00:06:44,040
+setRep lets you override the default level
+of replication. You can do this for one file
+
+44
+00:06:44,040 --> 00:06:49,630
+or,
+with the -R option, to an entire tree. This
+
+45
+00:06:49,630 --> 00:06:52,120
+command
+returns immediately after requesting the new
+
+46
+00:06:52,120 --> 00:06:56,680
+replication level. If you want the
+command to block until the job is done, pass
+
+47
+00:06:56,680 --> 00:07:03,680
+the -w option.
+IBM, with BigInsights, provides the BigInsights
+
+48
+00:07:05,040 --> 00:07:08,570
+Console as graphical way to work with
+HDFS.
+
+49
+00:07:08,570 --> 00:07:15,570
+The Cluster tab provides a simiple way to
+view that status of the Hadoop components.
+
+50
+00:07:18,389 --> 00:07:24,340
+The Files tab gives you a graphical mechanism
+to create directories in HDFS, move data
+
+51
+00:07:24,340 --> 00:07:30,900
+into and out of HDFS, delete files and directories,
+and so on. It is also possible to edit
+
+52
+00:07:30,900 --> 00:07:37,900
+data directly from within the console.
+You have control over file permissions as
+
+53
+00:07:38,090 --> 00:07:45,090
+well. You can change ownership of files and
+how others are able to access those files.
+
+54
+00:07:45,479 --> 00:07:50,400
+Even within the console, you have access to
+the Hadoop Files System Shell. You can
+
+55
+00:07:50,400 --> 00:07:56,300
+execute commands in the same way that you
+can from the command line. Note that you
+
+56
+00:07:56,300 --> 00:08:02,280
+still have to code the commands in the same
+way as we described doing so from the
+
+57
+00:08:02,280 --> 00:08:08,790
+command line.
+And now I would like to quickly demonstrate
+
+58
+00:08:08,790 --> 00:08:15,570
+the BigInsights Console. Here we are on
+the Files tab. I am going to expand out users.
+
+59
+00:08:15,570 --> 00:08:22,570
+We can see biadmin as a user there. Here
+is myfile.txt that was uploaded in a previous
+
+60
+00:08:23,460 --> 00:08:28,050
+demonstration. If I click on myfile.txt, I
+can
+
+61
+00:08:28,050 --> 00:08:35,050
+see the data over here. If I want, I can even
+edit that data. Let’s create a new directory.
+
+62
+00:08:48,829 --> 00:08:55,829
+So we have now created a new directory. Let’s
+upload myfile.txt to this new directory.
+
+63
+00:09:00,970 --> 00:09:07,970
+Browse to locate it. Under biadmin, we will
+select myfile.txt and that gets added to the
+
+64
+00:09:08,490 --> 00:09:14,860
+list. If I wanted to upload multiple files
+to this directory at one time, I could then
+
+65
+00:09:14,860 --> 00:09:17,740
+just
+browse for those files and add them to my
+
+66
+00:09:17,740 --> 00:09:22,339
+list here. When I have all of the files that
+I
+
+67
+00:09:22,339 --> 00:09:29,339
+want added to the list, I click ok. And now
+we can see that myfile.txt has been added
+
+68
+00:09:32,930 --> 00:09:38,509
+to
+the new directory. Let’s show that we can
+
+69
+00:09:38,509 --> 00:09:45,509
+modify and change permissions and if I want
+to, I can come in and execute my on Hadoop
+
+70
+00:09:47,709 --> 00:09:54,709
+file shell command. And 
+
+71
+00:10:16,949 --> 00:10:23,949
+we have now
+deleted that file. If I do a refresh, you
+
+72
+00:10:26,199 --> 00:10:33,199
+can see that the file now longer exists.
+This concludes the presentation. Thank you
+
+73
+00:10:36,730 --> 00:10:40,569
+for watching.
+Here is a list of trademarks that might have
+
+74
+00:10:40,569 --> 00:10:43,050
+been referenced in this presenetation.
+

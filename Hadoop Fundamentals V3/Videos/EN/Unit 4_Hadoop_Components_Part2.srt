@@ -1,0 +1,336 @@
+1
+00:00:03,810 --> 00:00:10,620
+Pig, Hive, and Jaql have much in common. They
+all translate high-level languages
+
+2
+00:00:10,620 --> 00:00:16,520
+into MapReduce jobs so that the programmer
+can work at a higher level than he or
+
+3
+00:00:16,520 --> 00:00:22,580
+she would when writing MapReduce jobs in Java
+or other lower-level languages
+
+4
+00:00:22,580 --> 00:00:28,300
+supported by Hadoop using Hadoop streaming.
+The high level languages offered by
+
+5
+00:00:28,300 --> 00:00:33,470
+Pig, Hive and Jaql let you write programs
+that are much smaller than the equivalent
+
+6
+00:00:33,470 --> 00:00:38,430
+Java code. When you find that you need to
+work at a lower level to accomplish
+
+7
+00:00:38,430 --> 00:00:43,340
+something these high-level languages do not
+support themselves, you have the
+
+8
+00:00:43,340 --> 00:00:50,160
+option to extend these languages, often by
+writing user-defined functions in Java.
+
+9
+00:00:50,160 --> 00:00:55,170
+Interoperability can work both ways since
+programs written in these high-level
+
+10
+00:00:55,170 --> 00:01:00,700
+languages can be imbedded inside other languages
+as well. Finally, since all these
+
+11
+00:01:00,700 --> 00:01:06,689
+technologies run on top of Hadoop, when they
+do so, they have the same limitations
+
+12
+00:01:06,689 --> 00:01:13,689
+with respect to random reads and writes and
+low-latency queries as Hadoop does.
+
+13
+00:01:14,070 --> 00:01:21,009
+Now, let us examine what is unique about each
+technology, starting with Pig. Pig
+
+14
+00:01:21,009 --> 00:01:26,710
+was developed at Yahoo Research around 2006
+and moved into the Apache
+
+15
+00:01:26,710 --> 00:01:33,710
+Software Foundation in 2007. Pig's language,
+called PigLatin, is a data flow
+
+16
+00:01:34,060 --> 00:01:39,060
+language - this is the kind of language in
+which you program by connecting things
+
+17
+00:01:39,060 --> 00:01:45,340
+together. Pig can operate on complex data
+structures, even those that can have levels
+
+18
+00:01:45,340 --> 00:01:52,009
+of nesting. Unlike SQL, Pig does not require
+that the data have a schema, so it is
+
+19
+00:01:52,009 --> 00:01:59,009
+well suited to processing unstructured data.
+However, Pig can still leverage the value
+
+20
+00:01:59,039 --> 00:02:05,299
+of a schema if you choose to supply one. Like
+SQL, PigLatin is relationally
+
+21
+00:02:05,299 --> 00:02:12,299
+complete, which means it is at least as powerful
+as relational algebra. Turing
+
+22
+00:02:13,180 --> 00:02:17,959
+completeness requires looping constructs,
+an infinite memory model, and
+
+23
+00:02:17,959 --> 00:02:24,959
+conditional constructs. PigLatin is not Turing
+complete on its own, but is Turing
+
+24
+00:02:25,409 --> 00:02:32,409
+complete when extended with User-Defined Functions.
+Hive is a technology developed at Facebook
+
+25
+00:02:32,640 --> 00:02:37,790
+that turns Hadoop into a data
+warehouse complete with a dialect of SQL for
+
+26
+00:02:37,790 --> 00:02:44,790
+querying. Being an SQL dialect,
+HiveQL is a declarative language. Unlike in
+
+27
+00:02:45,980 --> 00:02:51,159
+PigLatin, you do not specify the data
+flow, but instead describe the result you
+
+28
+00:02:51,159 --> 00:02:58,159
+want and Hive figures out how to build a
+data flow to achieve it. Also unlike Pig,
+
+29
+00:02:58,379 --> 00:03:05,379
+a schema is required, but you are not limited
+to one schema. Like PigLatin and SQL, HiveQL
+
+30
+00:03:08,650 --> 00:03:13,709
+on its own is a relationally
+complete language but not a Turing complete
+
+31
+00:03:13,709 --> 00:03:20,709
+language. It can be extended through
+UDFs just like Pig to be Turing complete.
+
+32
+00:03:23,340 --> 00:03:29,819
+The final technology is Jaql. Jaql was developed
+at IBM. It is a data flow language
+
+33
+00:03:29,819 --> 00:03:36,819
+like PigLatin but its native data structure
+format is JavaScript Object Notation, or
+
+34
+00:03:37,930 --> 00:03:43,959
+JSON. Schemas are optional and the Jaql language
+itself is Turing complete on its
+
+35
+00:03:43,959 --> 00:03:49,730
+own without the need for extension through
+UDFs.
+
+36
+00:03:49,730 --> 00:03:54,689
+Let us examine Pig in detail. Pig consists
+of a language and an execution
+
+37
+00:03:54,689 --> 00:03:59,829
+environment. The language is called PigLatin.
+There are two choices of execution
+
+38
+00:03:59,829 --> 00:04:06,829
+environment: a local environment and distributed
+environment. A local environment
+
+39
+00:04:07,340 --> 00:04:11,629
+is good for testing when you do not have a
+full distributed Hadoop environment
+
+40
+00:04:11,629 --> 00:04:17,510
+deployed. You tell Pig to run in the local
+environment when you start Pig's
+
+41
+00:04:17,510 --> 00:04:24,510
+command line interpreter by passing it the
+-x local option. You tell Pig to run in a
+
+42
+00:04:25,600 --> 00:04:32,600
+distributed environment by passing -x mapreduce
+instead. Alternatively, you can
+
+43
+00:04:33,440 --> 00:04:38,720
+start the Pig command line interpreter without
+any arguments and it will start it in
+
+44
+00:04:38,720 --> 00:04:44,600
+the distributed environment.
+There are three different ways to run Pig.
+
+45
+00:04:44,600 --> 00:04:50,430
+You can run your PigLatin code as a
+script, just by passing the name of your script
+
+46
+00:04:50,430 --> 00:04:57,060
+file to the pig command. You can run
+it interactively through the grunt command
+
+47
+00:04:57,060 --> 00:05:04,060
+line launched using pig with no script
+argument. Finally, you can call into Pig from
+
+48
+00:05:04,729 --> 00:05:10,490
+within Java using Pig's embedded
+form.
+
+49
+00:05:10,490 --> 00:05:14,720
+As mentioned in the overview, Hive is a technology
+for turning Hadoop into a data
+
+50
+00:05:14,720 --> 00:05:19,889
+warehouse, complete with an SQL dialect for
+querying it.
+
+51
+00:05:19,889 --> 00:05:25,800
+There are three ways to run Hive. You can
+run it interactively by launching the hive
+
+52
+00:05:25,800 --> 00:05:31,759
+shell using the hive command with no arguments.
+You can run a Hive script by
+
+53
+00:05:31,759 --> 00:05:38,759
+passing the -f option to the hive command
+along with the path to your script file.
+
+54
+00:05:39,759 --> 00:05:46,759
+Finally, you can execute a Hive program as
+one command by passing the -e option
+
+55
+00:05:47,960 --> 00:05:53,660
+to the hive command followed by your Hive
+program in quotes.
+
+56
+00:05:53,660 --> 00:06:00,660
+Jaql is a JSON-based query language that,
+like PigLatin and HiveQL, translates into
+
+57
+00:06:02,900 --> 00:06:09,900
+Hadoop MapReduce jobs. JSON is the data interchange
+standard that is human-readable
+
+58
+00:06:09,990 --> 00:06:15,860
+like XML but is designed to be lighter-weight.
+You run Jaql programs
+
+59
+00:06:15,860 --> 00:06:22,860
+using the Jaql shell. You start the Jaql shell
+using the jaqlshell command. If you pass
+
+60
+00:06:22,879 --> 00:06:29,879
+it no arguments, you start it in interactive
+mode. If you pass the -b argument and
+
+61
+00:06:30,840 --> 00:06:37,840
+the path to a file, you will execute the contents
+of that file as a Jaql script.
+
+62
+00:06:37,960 --> 00:06:44,199
+Finally, if you pass the -e argument, the
+Jaql shell will execute the Jaql statement
+
+63
+00:06:44,199 --> 00:06:51,199
+that follows the -e. There are two modes that
+the Jaql shell can run in: The first is
+
+64
+00:06:52,830 --> 00:06:59,830
+cluster mode, specified with a -c argument.
+It uses your Hadoop cluster if you have
+
+65
+00:07:00,650 --> 00:07:07,550
+one configured. The other option is minicluster
+mode, which starts a minicluster that
+
+66
+00:07:07,550 --> 00:07:14,550
+is useful for quick tests.
+This lesson is 
+continued 
+in 
+
+67
+00:10:45,260 --> 00:10:52,260
+the next video.
+

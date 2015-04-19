@@ -1,0 +1,299 @@
+﻿1
+00:00:02,129 --> 00:00:09,129
+Welcome to Hadoop Fundamentals, Hadoop Components.
+In this unit I will discuss the MapReduce
+
+2
+00:00:09,330 --> 00:00:16,330
+Philosophy, describe the usage of Pig, Hive,
+and Jaql, talk about how to get data into
+
+3
+00:00:16,730 --> 00:00:20,079
+Hadoop through the use of Flume and Sqoop
+and
+
+4
+00:00:20,079 --> 00:00:27,019
+finally describe how to schedule and control
+job execution using Oozie.
+
+5
+00:00:27,019 --> 00:00:32,540
+First I need to set the boundaries for this
+unit. The components presented in this unit
+
+6
+00:00:32,540 --> 00:00:36,410
+are
+done so at a very high level. The Hadoop environment
+
+7
+00:00:36,410 --> 00:00:41,570
+is littered with a number of open
+source components with funny sounding names.
+
+8
+00:00:41,570 --> 00:00:46,460
+And to some people, it is difficult to
+understand their usage. This unit is merely
+
+9
+00:00:46,460 --> 00:00:49,350
+an attempt to provide you with descriptions
+of
+
+10
+00:00:49,350 --> 00:00:54,820
+some of those components. If you are interested
+in getting more detail about each of the
+
+11
+00:00:54,820 --> 00:00:59,620
+components covered in this unit, then I would
+direct you to the other Big Data University
+
+12
+00:00:59,620 --> 00:01:06,620
+courses that are specific to these components.
+Let us take a look at MapReduce. MapReduce
+
+13
+00:01:08,759 --> 00:01:14,780
+is designed to process very large datasets
+for certain types of distributable problems.
+
+14
+00:01:14,780 --> 00:01:18,950
+It attempts to spread the work across a large
+number of nodes and allows those nodes to
+
+15
+00:01:18,950 --> 00:01:25,249
+process the data in parallel. You cannot have
+dependencies within the data, meaning that
+
+16
+00:01:25,249 --> 00:01:30,280
+you cannot have a requirement that one
+record in a dataset must be processed before
+
+17
+00:01:30,280 --> 00:01:34,869
+another.
+Results from the initial parallel processing
+
+18
+00:01:34,869 --> 00:01:38,409
+are sent to additional nodes where the data
+is
+
+19
+00:01:38,409 --> 00:01:44,999
+combined to allow for further reductions of
+the data.
+
+20
+00:01:44,999 --> 00:01:50,270
+Now let’s take a look at how the map and
+reduce operations work in sequence on your
+
+21
+00:01:50,270 --> 00:01:55,240
+data to produce the final output. In this
+case, we will have a job with a single map
+
+22
+00:01:55,240 --> 00:01:58,659
+step
+and a single reduce step. The first step is
+
+23
+00:01:58,659 --> 00:02:01,759
+the map step. It takes a subset of the full
+dataset
+
+24
+00:02:01,759 --> 00:02:07,310
+called an input split and applies to each
+row in the input split an operation that you
+
+25
+00:02:07,310 --> 00:02:12,280
+have
+written, such as parsing each character string.
+
+26
+00:02:12,280 --> 00:02:19,280
+The output data is buffered in memory and
+spills to disk. It is sorted and partitioned
+
+27
+00:02:20,330 --> 00:02:27,330
+by key using the default partitioner. A merge
+sort sorts each partition.
+
+28
+00:02:28,780 --> 00:02:33,100
+There may be multiple map operations running
+in parallel with each other, each one
+
+29
+00:02:33,100 --> 00:02:39,170
+processing a different input split.
+The partitions are shuffled among the reducers.
+
+30
+00:02:39,170 --> 00:02:45,420
+For example, partition 1 goes to
+reducer 1. The second map task also sends
+
+31
+00:02:45,420 --> 00:02:52,420
+its partition 1 to reducer 1.
+Partition 2 goes to another reducer.
+
+32
+00:02:53,010 --> 00:02:56,920
+Additional map tasks would act in the same
+way.
+
+33
+00:02:56,920 --> 00:03:03,150
+Each reducer does its own merge steps and
+executes the code of your reduce task.
+
+34
+00:03:03,150 --> 00:03:08,810
+For example, it could do a sum on the number
+of occurrences of a particular character
+
+35
+00:03:08,810 --> 00:03:15,490
+string.
+This produces sorted output at each reducer.
+
+36
+00:03:15,490 --> 00:03:22,490
+The data that flows into and out of the mappers
+and reducers takes a specific form.
+
+37
+00:03:23,650 --> 00:03:28,650
+Data enters Hadoop in unstructured form but
+before it gets to the first mapper,
+
+38
+00:03:28,650 --> 00:03:35,650
+Hadoop has changed it into key-value pairs
+with Hadoop supplying its own key.
+
+39
+00:03:36,930 --> 00:03:42,990
+The mapper produces a list of key value pairs.
+Both the key and the value may
+
+40
+00:03:42,990 --> 00:03:49,990
+change from the k1 and v1 that came in to
+a k2 and v2. There can now be duplicate
+
+41
+00:03:52,080 --> 00:03:57,710
+keys coming out of the mappers. The shuffle
+step will take care of grouping them
+
+42
+00:03:57,710 --> 00:04:02,650
+together.
+The output of the shuffle is the input to
+
+43
+00:04:02,650 --> 00:04:06,120
+the reducer step. Now, we still have a list
+of
+
+44
+00:04:06,120 --> 00:04:11,850
+the v2's that came out of the mapper step,
+but they are grouped by their keys and
+
+45
+00:04:11,850 --> 00:04:15,720
+there is no longer more than one record with
+the same key.
+
+46
+00:04:15,720 --> 00:04:22,720
+Finally, coming out of the reducer is, potentially,
+an entirely new key and value, k3
+
+47
+00:04:23,190 --> 00:04:30,190
+and v3. For example, if your reducer summed
+the values associated with each k2,
+
+48
+00:04:30,600 --> 00:04:37,600
+your k3 would be equal to k2 and your v3 would
+be the sum of the list of v2s.
+
+49
+00:04:41,090 --> 00:04:46,910
+Let us look at an example of a simple data
+flow. Say we want to transform the input
+
+50
+00:04:46,910 --> 00:04:52,780
+on the left to the output on the right. On
+the left, we just have letters. On the right,
+
+51
+00:04:52,780 --> 00:04:58,460
+we have counts of the number of occurrences
+of each letter in the input.
+
+52
+00:04:58,460 --> 00:05:04,280
+Hadoop does the first step for us. It turns
+the input data into key-value pairs and
+
+53
+00:05:04,280 --> 00:05:09,540
+supplies its own key: an increasing sequence
+number.
+
+54
+00:05:09,540 --> 00:05:14,160
+The function we write for the mapper needs
+to take these key-value pairs and
+
+55
+00:05:14,160 --> 00:05:20,150
+produce something that the reduce step can
+use to count occurrences. The simplest
+
+56
+00:05:20,150 --> 00:05:27,150
+solution is make each letter a key and make
+every value a 1.
+
+57
+00:05:27,570 --> 00:05:34,419
+The shuffle groups records having the same
+key together, so we see B now has two
+
+58
+00:05:34,419 --> 00:05:41,419
+values, both 1, associated with it.
+The reduce is simple: it just sums the values
+
+59
+00:05:43,360 --> 00:05:49,130
+it is given to produce a sum for each
+key.
+
+60
+00:05:49,130 --> 00:05:52,120
+This lesson is continued in the next video.
+

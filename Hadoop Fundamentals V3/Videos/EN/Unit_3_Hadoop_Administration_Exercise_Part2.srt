@@ -1,0 +1,443 @@
+1
+00:00:00,610 --> 00:00:04,060
+so let's continue with adding a node to
+a cluster
+
+2
+00:00:04,060 --> 00:00:07,240
+and after we've updated our
+
+3
+00:00:07,240 --> 00:00:11,480
+/etc/hosts files let's make sure
+that we actually do have
+
+4
+00:00:11,480 --> 00:00:14,500
+connectivity so I'm going to execute
+
+5
+00:00:14,500 --> 00:00:18,220
+ssh and I'm going to log onto
+
+6
+00:00:18,220 --> 00:00:23,230
+bivm2 as root entered in my password
+
+7
+00:00:23,230 --> 00:00:26,330
+and everything went
+
+8
+00:00:26,330 --> 00:00:31,480
+okay I'll exit out of there so now I
+know I've got connectivity
+
+9
+00:00:31,480 --> 00:00:35,320
+and we will
+
+10
+00:00:35,320 --> 00:00:42,320
+need to start our BigInsights
+components at this point now
+
+11
+00:00:42,649 --> 00:00:46,020
+you can click on the icon on the desktop
+
+12
+00:00:46,020 --> 00:00:50,930
+but that only comes with this QuickStart
+image
+
+13
+00:00:50,930 --> 00:00:54,430
+in real life you won't have that icon on
+the desktop
+
+14
+00:00:54,430 --> 00:00:58,829
+if you install the software so let's do
+it the old fashion way
+
+15
+00:00:58,829 --> 00:01:02,570
+and from a command line we're going to
+execute
+
+16
+00:01:02,570 --> 00:01:09,010
+start-all script that's in the $BIGINSIGHTS_HOME/bin directory
+
+17
+00:01:09,010 --> 00:01:12,270
+and this is going to go through the process
+of
+
+18
+00:01:12,270 --> 00:01:15,310
+starting the various components
+
+19
+00:01:15,310 --> 00:01:18,900
+for BigInsights we're not going to
+
+20
+00:01:18,900 --> 00:01:22,229
+waste a lot of time
+
+21
+00:01:22,229 --> 00:01:29,229
+well we'll speed this up let me put it that
+way and once
+
+22
+00:01:29,780 --> 00:01:35,200
+we get everything started we will go ahead
+and get rid of that window
+
+23
+00:01:35,200 --> 00:01:38,520
+and now I will start the web console
+
+24
+00:01:38,520 --> 00:01:42,130
+I'm going to use initially the web console to
+
+25
+00:01:42,130 --> 00:01:49,130
+add our new node I'm going to log in as biadmin
+
+26
+00:01:56,750 --> 00:01:58,440
+initially we are taken to the welcome
+
+27
+00:01:58,440 --> 00:02:03,020
+page we'll move to the cluster status
+
+28
+00:02:03,020 --> 00:02:10,020
+and here we can see that we have a
+couple about our components that are not
+
+29
+00:02:10,670 --> 00:02:11,730
+running right now
+
+30
+00:02:11,730 --> 00:02:15,220
+and it just may be that
+
+31
+00:02:15,220 --> 00:02:19,110
+we hit it too soon there you go
+
+32
+00:02:19,110 --> 00:02:23,240
+HBase just started running but we only
+have one node
+
+33
+00:02:23,240 --> 00:02:26,700
+that's the bivm.ibm.com
+
+34
+00:02:26,700 --> 00:02:30,730
+so let's add a new node I'm going to
+
+35
+00:02:30,730 --> 00:02:35,810
+type in the hostname I could have typed
+in the IP address I could have typed in
+
+36
+00:02:35,810 --> 00:02:37,520
+a range of IP addresses
+
+37
+00:02:37,520 --> 00:02:41,790
+type in the password for root
+
+38
+00:02:41,790 --> 00:02:44,880
+on the bivm2 system
+
+39
+00:02:44,880 --> 00:02:50,550
+and the first they were going to do is try
+to make sure that we have connectivity
+
+40
+00:02:50,550 --> 00:02:53,989
+and yes the master is able to get
+
+41
+00:02:53,989 --> 00:02:58,040
+in touch with that child so now
+
+42
+00:02:58,040 --> 00:03:01,260
+we know about the node
+
+43
+00:03:01,260 --> 00:03:06,340
+we need to add services to the node. We're
+only going to choose the
+
+44
+00:03:06,340 --> 00:03:07,420
+DataNode/TaskTracker
+
+45
+00:03:07,420 --> 00:03:12,030
+on our new node this normally runs
+
+46
+00:03:12,030 --> 00:03:16,000
+a while I'm not going to put you through
+that pain
+
+47
+00:03:16,000 --> 00:03:19,530
+if you're doing it in lab exercise you
+will experience it
+
+48
+00:03:19,530 --> 00:03:23,090
+and here we have a successful operation
+
+49
+00:03:23,090 --> 00:03:27,630
+we can now see that bivm2
+
+50
+00:03:27,630 --> 00:03:31,769
+is running and its running as a data
+
+51
+00:03:31,769 --> 00:03:38,180
+node and task tracker what about
+
+52
+00:03:38,180 --> 00:03:41,620
+adding a new node via the command
+line
+
+53
+00:03:41,620 --> 00:03:46,250
+I have gone through the process of
+setting up a third
+
+54
+00:03:46,250 --> 00:03:49,720
+VMWare image and
+
+55
+00:03:49,720 --> 00:03:55,470
+you can see I have called it bivm3
+went through the same process that we
+
+56
+00:03:55,470 --> 00:03:58,530
+showed earlier when setting up bivm2
+
+57
+00:03:58,530 --> 00:04:03,690
+and I did my SSH and all those things
+
+58
+00:04:03,690 --> 00:04:08,520
+now what we're going to do is change to
+
+59
+00:04:08,520 --> 00:04:11,840
+$BIGINSIGHTS_HOME/bin directory
+
+60
+00:04:11,840 --> 00:04:15,209
+and we'll
+
+61
+00:04:15,209 --> 00:04:19,060
+execute the add node script
+
+62
+00:04:19,060 --> 00:04:23,840
+now we have to specify the component in
+our case it's gonna be Hadoop that means
+
+63
+00:04:23,840 --> 00:04:27,010
+task tracker and a
+
+64
+00:04:27,010 --> 00:04:30,020
+data node and we specify
+
+65
+00:04:30,020 --> 00:04:33,750
+the hostname or IP address
+
+66
+00:04:33,750 --> 00:04:37,520
+and then a comma and then the password for root
+
+67
+00:04:37,520 --> 00:04:40,789
+on that other system in my case the
+password was password
+
+68
+00:04:40,789 --> 00:04:45,300
+now it's going through the process
+
+69
+00:04:45,300 --> 00:04:48,650
+of installing the code
+
+70
+00:04:48,650 --> 00:04:52,950
+on bivm3 but again not going to put
+you through
+
+71
+00:04:52,950 --> 00:04:57,099
+the entire time that it took to do that
+but you can see that
+
+72
+00:04:57,099 --> 00:05:01,510
+we had some success there we go back to
+the
+
+73
+00:05:01,510 --> 00:05:05,190
+web console login
+
+74
+00:05:05,190 --> 00:05:08,849
+we should now see that we have three
+nodes
+
+75
+00:05:08,849 --> 00:05:14,630
+in an our cluster and we do
+
+76
+00:05:14,630 --> 00:05:19,530
+bivm3 is also running as a data
+node in the task tracker
+
+77
+00:05:19,530 --> 00:05:23,169
+what about removing a node
+
+78
+00:05:23,169 --> 00:05:26,460
+it is possible to remove a node using
+the
+
+79
+00:05:26,460 --> 00:05:30,510
+the graphical interface but we're going to
+go ahead just do it from a command line
+
+80
+00:05:30,510 --> 00:05:30,930
+I'm going to
+
+81
+00:05:30,930 --> 00:05:34,289
+close this window and open a new
+
+82
+00:05:34,289 --> 00:05:37,320
+command line window didn't have to do
+but I just thought
+
+83
+00:05:37,320 --> 00:05:41,080
+it would be nice if we had a fresh window
+without a
+
+84
+00:05:41,080 --> 00:05:45,729
+lot of extraneous information there I'm
+going to change to the
+
+85
+00:05:45,729 --> 00:05:51,780
+bin directory for BigInsights again and
+now I'm going to execute the removenode
+
+86
+00:05:51,780 --> 00:05:52,500
+ 
+
+87
+00:05:52,500 --> 00:05:55,919
+script I need to specify
+
+88
+00:05:55,919 --> 00:05:58,930
+the hostname or IP address
+
+89
+00:05:58,930 --> 00:06:02,210
+and also going to specify the -f
+
+90
+00:06:02,210 --> 00:06:07,570
+command which says force because we
+possibly can have
+
+91
+00:06:07,570 --> 00:06:12,560
+files in which part the replication is
+now on bivm3
+
+92
+00:06:12,560 --> 00:06:17,280
+and what we're saying is we're aware
+that
+
+93
+00:06:17,280 --> 00:06:20,729
+and we may end up with some files
+that
+
+94
+00:06:20,729 --> 00:06:24,470
+don't have all of the replicas
+
+95
+00:06:24,470 --> 00:06:29,500
+that Hadoop would like
+
+96
+00:06:29,500 --> 00:06:34,290
+and so we go through the process of 
+removing the node and we can see that
+
+97
+00:06:34,290 --> 00:06:37,600
+we had success
+
+98
+00:06:37,600 --> 00:06:40,889
+we can verify this by doing a
+
+99
+00:06:40,889 --> 00:06:47,889
+listnode
+
+100
+00:06:49,690 --> 00:06:53,940
+and we see you there bivm and bivm2
+
+101
+00:06:53,940 --> 00:06:56,290
+are the nodes in our system
+

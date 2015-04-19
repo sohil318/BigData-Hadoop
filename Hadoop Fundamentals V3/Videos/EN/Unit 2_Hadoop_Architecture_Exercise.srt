@@ -1,0 +1,752 @@
+1
+00:00:01,319 --> 00:00:04,549
+well if you had started your image
+
+2
+00:00:04,549 --> 00:00:09,080
+and logged in as biadmin you would be at
+your desktop
+
+3
+00:00:09,080 --> 00:00:12,610
+notice we've got a couple icons on the
+desktop to start
+
+4
+00:00:12,610 --> 00:00:15,809
+and stop BigInsights that's unique to
+this
+
+5
+00:00:15,809 --> 00:00:20,109
+image will do it the old fashion way to
+start the components
+
+6
+00:00:20,109 --> 00:00:23,850
+we will open a command line and then
+using
+
+7
+00:00:23,850 --> 00:00:27,359
+the $BIGINSIGHTS_HOME
+environment variable
+
+8
+00:00:27,359 --> 00:00:31,320
+which is set for us automatically go to
+the bin directory
+
+9
+00:00:31,320 --> 00:00:34,350
+execute the start-all script
+
+10
+00:00:34,350 --> 00:00:38,360
+this can run for a while
+
+11
+00:00:38,360 --> 00:00:42,780
+starting all the components through the
+wonders of technology
+
+12
+00:00:42,780 --> 00:00:46,320
+for this video it will not run
+
+13
+00:00:46,320 --> 00:00:53,320
+as long as normally
+
+14
+00:00:56,690 --> 00:00:58,769
+so now my components have all been
+started
+
+15
+00:00:58,769 --> 00:01:04,460
+just two get a fresh command line I'm
+going to close out the window
+
+16
+00:01:04,460 --> 00:01:07,479
+did not have to and open a
+
+17
+00:01:07,479 --> 00:01:10,670
+new one and now we're going to use the
+Hadoop
+
+18
+00:01:10,670 --> 00:01:15,500
+file shell and start off by 
+listing
+
+19
+00:01:15,500 --> 00:01:19,020
+the items in the
+
+20
+00:01:19,020 --> 00:01:22,259
+current directory and so we
+
+21
+00:01:22,259 --> 00:01:29,259
+see what those particular items are and
+
+22
+00:01:29,710 --> 00:01:35,929
+what if we wanted to list what is in a
+specific directory
+
+23
+00:01:35,929 --> 00:01:39,240
+well let's take a look at /user/biadmin
+
+24
+00:01:39,240 --> 00:01:44,030
+and we see that we've got
+
+25
+00:01:44,030 --> 00:01:47,350
+some data out there
+
+26
+00:01:47,350 --> 00:01:52,209
+alright
+
+27
+00:01:52,209 --> 00:01:56,759
+well let's go ahead and start massaging
+
+28
+00:01:56,759 --> 00:02:00,840
+HDFS let's create our own directory
+
+29
+00:02:00,840 --> 00:02:04,670
+we are going to create a test directory or a
+directory called test
+
+30
+00:02:04,670 --> 00:02:08,359
+that is going to reside under the biadmin
+
+31
+00:02:08,359 --> 00:02:11,790
+directory so we're gonna do a -mkdir
+
+32
+00:02:11,790 --> 00:02:15,680
+/user/biadmin/test
+
+33
+00:02:15,680 --> 00:02:21,660
+and once again let's do a recall and
+bring back the
+
+34
+00:02:21,660 --> 00:02:26,160
+list of the biadmin directory
+
+35
+00:02:26,160 --> 00:02:29,650
+to make sure this all work properly in
+there we see
+
+36
+00:02:29,650 --> 00:02:36,650
+our new directory has been created for
+us now
+
+37
+00:02:39,569 --> 00:02:43,480
+I would like to show you about uploading
+data
+
+38
+00:02:43,480 --> 00:02:47,400
+from a local filesystem into HDFS
+
+39
+00:02:47,400 --> 00:02:50,850
+so I have done a
+
+40
+00:02:50,850 --> 00:02:55,180
+change directory to my biadmin home directory this is on my local
+
+41
+00:02:55,180 --> 00:02:55,989
+filesystem
+
+42
+00:02:55,989 --> 00:03:00,799
+and I am creating a file called myFile.txt
+
+43
+00:03:00,799 --> 00:03:07,120
+little bit data in there and it is going
+to be this file myFile.txt that's
+
+44
+00:03:07,120 --> 00:03:08,099
+going to be
+
+45
+00:03:08,099 --> 00:03:11,970
+uploaded to HDFS so we going to use the
+
+46
+00:03:11,970 --> 00:03:15,000
+-put command
+
+47
+00:03:15,000 --> 00:03:20,269
+we could have also specified the copyFromLocal remember those are both
+
+48
+00:03:20,269 --> 00:03:25,370
+the same so we're going to put
+
+49
+00:03:25,370 --> 00:03:28,720
+biadmin's home/myFile.txt
+
+50
+00:03:28,720 --> 00:03:32,670
+to test/myFile.txt
+
+51
+00:03:32,670 --> 00:03:38,189
+and let's
+
+52
+00:03:38,189 --> 00:03:42,209
+once again do a list of in this case
+the test
+
+53
+00:03:42,209 --> 00:03:45,319
+directory and we can see that
+
+54
+00:03:45,319 --> 00:03:49,120
+our file myFile.txt is located
+there
+
+55
+00:03:49,120 --> 00:03:53,000
+notice this one thats
+
+56
+00:03:53,000 --> 00:03:56,689
+to the right I of the permissions
+information
+
+57
+00:03:56,689 --> 00:04:00,819
+that one indicates that's the
+replication factor
+
+58
+00:04:00,819 --> 00:04:05,079
+now we're early running on a single node
+so there's only going to be
+
+59
+00:04:05,079 --> 00:04:08,680
+a single copy up each file but
+
+60
+00:04:08,680 --> 00:04:13,030
+on a normal cluster we would see that
+being set to 3
+
+61
+00:04:13,030 --> 00:04:17,099
+we can also execute various
+
+62
+00:04:17,099 --> 00:04:20,859
+regular Linux commands like grep so
+let's go ahead and do a list
+
+63
+00:04:20,859 --> 00:04:24,380
+of the biadmin directory and grep that
+with test
+
+64
+00:04:24,380 --> 00:04:27,580
+and notice that we just come back with
+that one entry
+
+65
+00:04:27,580 --> 00:04:34,469
+for the test directory we can
+
+66
+00:04:34,469 --> 00:04:37,530
+check the size of
+
+67
+00:04:37,530 --> 00:04:41,820
+files or files within a directory in this
+case let's go ahead and check the file
+
+68
+00:04:41,820 --> 00:04:42,570
+size:
+
+69
+00:04:42,570 --> 00:04:47,150
+of our myFile.txt
+
+70
+00:04:47,150 --> 00:04:53,960
+that we upload the test directory and we
+can see that it's
+
+71
+00:04:53,960 --> 00:04:59,120
+29 bytes and
+
+72
+00:04:59,120 --> 00:05:06,120
+we can do this for the entire directory
+as well
+
+73
+00:05:09,120 --> 00:05:12,279
+will see all the items in the biadmin
+directory and
+
+74
+00:05:12,279 --> 00:05:16,430
+the size those items if we want to get
+
+75
+00:05:16,430 --> 00:05:20,159
+a total of everything in the directory
+
+76
+00:05:20,159 --> 00:05:23,800
+we would use the -du
+
+77
+00:05:23,800 --> 00:05:29,310
+-s parameter
+
+78
+00:05:29,310 --> 00:05:33,339
+and that will then give us a total all
+up the bytes
+
+79
+00:05:33,339 --> 00:05:40,339
+in that particular directory
+
+80
+00:05:42,139 --> 00:05:46,220
+if you want to learn more about the
+various commands
+
+81
+00:05:46,220 --> 00:05:49,940
+you can always do a -help or you can
+run help
+
+82
+00:05:49,940 --> 00:05:55,110
+for a specific command so that's
+
+83
+00:05:55,110 --> 00:05:58,550
+interfacing with HDFS using
+
+84
+00:05:58,550 --> 00:06:01,720
+the command line
+
+85
+00:06:01,720 --> 00:06:05,180
+and the file shell now let's open up
+
+86
+00:06:05,180 --> 00:06:10,010
+the BigInsights console notice I clicked
+on an icon
+
+87
+00:06:10,010 --> 00:06:13,280
+on the desktop thats just once again
+unique
+
+88
+00:06:13,280 --> 00:06:17,210
+to this environment this lab image
+
+89
+00:06:17,210 --> 00:06:24,210
+normally would bring up Firefox and then
+specify the URL your host colon 8080
+
+90
+00:06:24,669 --> 00:06:30,340
+to be able to log in we were first brought to
+the welcome page in there a number I
+
+91
+00:06:30,340 --> 00:06:30,650
+of
+
+92
+00:06:30,650 --> 00:06:34,940
+shortcuts that get you into doing
+various things I've clicked on the
+
+93
+00:06:34,940 --> 00:06:39,940
+cluster status clicked on the nodes and
+getting a list of nodes well we only
+
+94
+00:06:39,940 --> 00:06:42,940
+have one node once again but I could add
+more nodes
+
+95
+00:06:42,940 --> 00:06:47,750
+I could add services to my nodes stop
+services stop those
+
+96
+00:06:47,750 --> 00:06:51,039
+remove them clicking on MapReduce
+
+97
+00:06:51,039 --> 00:06:54,960
+you know I get the status I can
+see the status of all the components over
+
+98
+00:06:54,960 --> 00:06:55,900
+there on the
+
+99
+00:06:55,900 --> 00:07:00,090
+the left side and I'm able to
+
+100
+00:07:00,090 --> 00:07:04,130
+start/stop some of those components as
+well
+
+101
+00:07:04,130 --> 00:07:07,950
+what I'm gonna do now as I'm bringing up
+the built-in
+
+102
+00:07:07,950 --> 00:07:13,260
+web page that comes with Hadoop this is
+for the task tracker
+
+103
+00:07:13,260 --> 00:07:16,590
+and you can see that it's well a web
+page
+
+104
+00:07:16,590 --> 00:07:20,910
+it's there but the BigInsights console
+
+105
+00:07:20,910 --> 00:07:27,160
+just gives you so much more and then click
+on the files tab
+
+106
+00:07:27,160 --> 00:07:30,330
+and I'm doing this because it did not
+open
+
+107
+00:07:30,330 --> 00:07:33,380
+correctly I don't know what the problem
+is with this image but it doesn't open
+
+108
+00:07:33,380 --> 00:07:34,130
+correctly
+
+109
+00:07:34,130 --> 00:07:38,080
+I have failed that the if I go to the
+Files tab
+
+110
+00:07:38,080 --> 00:07:43,150
+immediately after I've logged in to the
+web console
+
+111
+00:07:43,150 --> 00:07:47,169
+it works fine or if I've gone to another
+tab
+
+112
+00:07:47,169 --> 00:07:51,099
+if I then click the big sheets tab and
+then go back to the files
+
+113
+00:07:51,099 --> 00:07:56,479
+it displays properly and we're going to
+drill down on user and
+
+114
+00:07:56,479 --> 00:07:59,969
+biadmin and notice there is our test
+directory
+
+115
+00:07:59,969 --> 00:08:04,070
+we created and there is myFile.txt that was
+
+116
+00:08:04,070 --> 00:08:07,070
+uploaded if I click on that we can see
+what the
+
+117
+00:08:07,070 --> 00:08:11,880
+data is in that file at least some
+portion there of it and you can also do
+
+118
+00:08:11,880 --> 00:08:12,500
+editing
+
+119
+00:08:12,500 --> 00:08:16,760
+sometimes we have a bunch of
+
+120
+00:08:16,760 --> 00:08:20,010
+icons that that the technical term bunch
+
+121
+00:08:20,010 --> 00:08:23,770
+I that we can use to you know work
+
+122
+00:08:23,770 --> 00:08:28,690
+with files and directories so I have
+selected biadmin
+
+123
+00:08:28,690 --> 00:08:32,469
+and now I'm going to create
+
+124
+00:08:32,469 --> 00:08:36,570
+a directory I want to do that
+graphically we'll call this directory
+
+125
+00:08:36,570 --> 00:08:37,640
+ConsoleLab
+
+126
+00:08:37,640 --> 00:08:44,640
+click OK and we can see that the
+ConsoleLab directory has been created
+
+127
+00:08:45,709 --> 00:08:46,410
+underneath
+
+128
+00:08:46,410 --> 00:08:50,450
+biadmin if I select ConsoleLab
+
+129
+00:08:50,450 --> 00:08:54,360
+and then click the rename icon
+
+130
+00:08:54,360 --> 00:08:58,240
+I can change the name
+
+131
+00:08:58,240 --> 00:09:02,829
+of a directory or I can change the name
+of a file we'll call this ConsoleLabTest
+
+132
+00:09:02,829 --> 00:09:09,829
+ 
+
+133
+00:09:10,149 --> 00:09:14,160
+I can upload data
+
+134
+00:09:14,160 --> 00:09:20,339
+using the BigInsights console so
+I browse for my file
+
+135
+00:09:20,339 --> 00:09:25,990
+choose it put it my upload list there if
+I wanted to I could add additional files
+
+136
+00:09:25,990 --> 00:09:29,420
+to that upload list they would all be
+uploaded to the same directory
+
+137
+00:09:29,420 --> 00:09:35,480
+at the same time clicking mFile.txt that I just uploaded
+
+138
+00:09:35,480 --> 00:09:39,350
+click the icon to remove it it gets
+deleted
+
+139
+00:09:39,350 --> 00:09:45,120
+I can select myFile.txt that's
+underneath the test
+
+140
+00:09:45,120 --> 00:09:48,420
+directory and specify that I want to
+
+141
+00:09:48,420 --> 00:09:55,420
+move it I drill down to
+
+142
+00:09:55,440 --> 00:09:59,180
+and select ConsoleLabTest
+
+143
+00:09:59,180 --> 00:10:02,910
+click OK and the file will get moved
+
+144
+00:10:02,910 --> 00:10:09,910
+there are a number of things I'm just
+not showing you I mean we could have
+
+145
+00:10:10,470 --> 00:10:15,649
+have copied myFile.txt from HDFS
+down to the local file system if we wanted to
+
+146
+00:10:15,649 --> 00:10:15,980
+ 
+
+147
+00:10:15,980 --> 00:10:19,490
+we can change the permission of a file
+
+148
+00:10:19,490 --> 00:10:23,180
+or ownership and
+
+149
+00:10:23,180 --> 00:10:26,569
+we can actually get access to
+
+150
+00:10:26,569 --> 00:10:29,649
+the Hadoop shell command once
+
+151
+00:10:29,649 --> 00:10:33,110
+again if we want to
+
+152
+00:10:33,110 --> 00:10:37,490
+type in and use a text format
+
+153
+00:10:37,490 --> 00:10:43,139
+in a graphical interface so in this case we're
+going to do a
+
+154
+00:10:43,139 --> 00:10:48,420
+removal the myFile.txt notice
+I've got to
+
+155
+00:10:48,420 --> 00:10:52,089
+type in the entire hadoop fs command
+
+156
+00:10:52,089 --> 00:10:56,149
+there's no short cut here click Submit
+
+157
+00:10:56,149 --> 00:11:00,319
+and the command gets executed
+
+158
+00:11:00,319 --> 00:11:05,519
+if I close that out notice myFile.txt is still there if I do a refresh
+
+159
+00:11:05,519 --> 00:11:09,680
+I'm going to get it in indicator that hey
+that file is no longer there
+
+160
+00:11:09,680 --> 00:11:16,170
+but we know that we deleted it so that gives you some idea of the capabilities
+
+161
+00:11:16,170 --> 00:11:19,760
+of the the web console
+
+162
+00:11:19,760 --> 00:11:23,160
+let's go ahead and log out I could
+
+163
+00:11:23,160 --> 00:11:28,930
+click the Stop BigInsights icon once
+again in order to stop my components or
+
+164
+00:11:28,930 --> 00:11:31,970
+I could bring up
+
+165
+00:11:31,970 --> 00:11:38,899
+a command line and once again going to
+the bin directory under my $BIGINSIGHTS_HOME
+
+166
+00:11:38,899 --> 00:11:41,930
+installation directory and this time
+
+167
+00:11:41,930 --> 00:11:48,930
+I will do a stop-all so we're not going to
+
+168
+00:11:51,730 --> 00:11:54,970
+go through the entire time of waiting for
+almost of this to stop
+
+169
+00:11:54,970 --> 00:11:57,000
+this is the end at the exercise
+

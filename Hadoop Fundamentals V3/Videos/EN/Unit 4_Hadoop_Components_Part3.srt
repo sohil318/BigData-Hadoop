@@ -1,0 +1,264 @@
+1
+00:00:01,599 --> 00:00:08,469
+Next let us look at moving data into Hadoop.
+We will begin by looking at Flume's architecture,
+
+2
+00:00:08,469 --> 00:00:14,199
+then examine the three modes it
+can run in followed by a look at the event
+
+3
+00:00:14,199 --> 00:00:20,090
+data model.
+Flume is an open source software program developed
+
+4
+00:00:20,090 --> 00:00:25,230
+by Cloudera that acts as a
+service for aggregating and moving large amounts
+
+5
+00:00:25,230 --> 00:00:32,230
+of data around a Hadoop cluster
+as the data is produced or shortly thereafter.
+
+6
+00:00:32,390 --> 00:00:38,120
+Its primary use case is the gathering of
+log files from all the machines in a cluster
+
+7
+00:00:38,120 --> 00:00:41,769
+to persist them in a centralized store such
+as HDFS.
+
+8
+00:00:41,769 --> 00:00:42,199
+This topic is not intended to cover all aspects
+of Sqoop but to give you an idea of the
+
+9
+00:00:42,199 --> 00:00:46,739
+capabilities of Sqoop.
+Sqoop is an open source product designed to
+
+10
+00:00:46,739 --> 00:00:52,949
+transfer data between relational database
+systems and Hadoop. It uses JDBC to access
+
+11
+00:00:52,949 --> 00:00:58,329
+the relational systems.
+Sqoop accesses the database in order to understand
+
+12
+00:00:58,329 --> 00:01:03,260
+the schema of the data. It then
+generates a MapReduce application to import
+
+13
+00:01:03,260 --> 00:01:09,829
+or export the data. When you use Sqoop to
+import data into Hadoop, Sqoop generates a
+
+14
+00:01:09,829 --> 00:01:16,829
+Java class that encapsulates one row of the
+imported table. You have access to the source
+
+15
+00:01:17,079 --> 00:01:24,079
+code for the generate class. This can allow
+you to quickly develop any other MapReduce
+
+16
+00:01:24,719 --> 00:01:31,719
+applications that use the records that Sqoop
+stored into HDFS.
+
+17
+00:01:31,929 --> 00:01:37,329
+In Flume, you create data flows by building
+up chains of logical nodes and
+
+18
+00:01:37,329 --> 00:01:43,789
+connecting them to sources and sinks. For
+example, say you wish to move data from
+
+19
+00:01:43,789 --> 00:01:50,789
+an Apache access log into HDFS. You create
+a source by tailing access.log and use a
+
+20
+00:01:51,979 --> 00:01:58,979
+logical node to route this to an HDFS sink.
+Most production Flume deployments have a three
+
+21
+00:02:01,710 --> 00:02:08,710
+tier design. The agent tier consists
+of Flume agents colocated with the source
+
+22
+00:02:09,509 --> 00:02:15,740
+of the data that is to be moved. The
+collector tier consists of perhaps multiple
+
+23
+00:02:15,740 --> 00:02:21,830
+collectors each of which collects data
+coming in from multiple agents and forwards
+
+24
+00:02:21,830 --> 00:02:28,830
+it on to the storage tier which may
+consist of a file system such as HDFS.
+
+25
+00:02:29,660 --> 00:02:35,580
+Here is an example of such a design. Say we
+have four http server nodes producing
+
+26
+00:02:35,580 --> 00:02:42,580
+log files labelled httpd_logx where x is a
+number between 1 and 4. Each of these
+
+27
+00:02:45,190 --> 00:02:52,190
+http server nodes has a Flume agent process
+running on it. There are two collector
+
+28
+00:02:53,270 --> 00:02:59,730
+nodes. Collector1 is configured to take data
+from Agent1 and Agent2 and route it to
+
+29
+00:02:59,730 --> 00:03:06,730
+HDFS. Collector2 is configured to take data
+from Agent3 and Agent4 and route it to
+
+30
+00:03:06,910 --> 00:03:12,510
+HDFS. Having multiple collector processes
+allows one to increase the parallelism in
+
+31
+00:03:12,510 --> 00:03:19,510
+which data flows into HDFS from the web servers.
+Oozie is an open source job control component
+
+32
+00:03:23,060 --> 00:03:28,930
+used to manage Hadoop jobs.
+Oozie workflows are collections of actions
+
+33
+00:03:28,930 --> 00:03:33,150
+arranged in a Direct Acyclic Graph. There
+is a
+
+34
+00:03:33,150 --> 00:03:39,060
+control dependency between actions in that
+a second action cannot run until the
+
+35
+00:03:39,060 --> 00:03:45,120
+proceeding action completes. For example,
+you have the capability of having one job
+
+36
+00:03:45,120 --> 00:03:52,120
+execute only when a previous job completed
+successfully. You can specify that several
+
+37
+00:03:52,260 --> 00:03:58,570
+jobs are permitted to execute in parallel
+but a final job must wait to begin executing
+
+38
+00:03:58,570 --> 00:04:03,320
+until
+all parallel jobs complete. Workflows are
+
+39
+00:04:03,320 --> 00:04:10,320
+written in hPDL an XML process definition
+language, and are stored in a file called
+
+40
+00:04:11,010 --> 00:04:18,010
+workflow.xml.
+Each workflow action starts jobs in some remote
+
+41
+00:04:18,410 --> 00:04:24,500
+system and that remote system performs
+a callback to Oozie to notify that the action
+
+42
+00:04:24,500 --> 00:04:30,590
+completed.
+The coordinator component can invoke workflows
+
+43
+00:04:30,590 --> 00:04:36,590
+based upon a time interval, that is for
+example, once every 15 minutes, or based upon
+
+44
+00:04:36,590 --> 00:04:42,900
+the availability of specific data. It might
+also be necessary to connect workflow jobs
+
+45
+00:04:42,900 --> 00:04:49,040
+that run regularly but at different time
+intervals. For example, you may want the output
+
+46
+00:04:49,040 --> 00:04:54,720
+of the last four jobs that run every 15
+minutes to be the input to a job that runs
+
+47
+00:04:54,720 --> 00:04:59,120
+every hour.
+A single workflow can invoke a single task
+
+48
+00:04:59,120 --> 00:05:05,600
+or multiple tasks, either in sequence or based
+upon some control logic.
+
+49
+00:05:05,600 --> 00:05:12,600
+The is the end of this unit and the course.
+As I said earlier, the components discussed
+
+50
+00:05:13,280 --> 00:05:16,580
+in
+this unit have Big Data University courses
+
+51
+00:05:16,580 --> 00:05:19,820
+that cover them in more detail. Thank you
+for
+
+52
+00:05:19,820 --> 00:05:23,500
+attending.
+Here is a list of trademarks that may have
+
+53
+00:05:23,500 --> 00:05:25,460
+been referenced in this unit.
+

@@ -1,0 +1,430 @@
+1
+00:00:01,510 --> 00:00:03,320
+in the first exercise
+
+2
+00:00:03,320 --> 00:00:07,810
+we ask you to download the 64-bit
+
+3
+00:00:07,810 --> 00:00:11,690
+VMWare image that you will use for
+future
+
+4
+00:00:11,690 --> 00:00:15,150
+exercises and we provide
+
+5
+00:00:15,150 --> 00:00:18,869
+a link to the
+
+6
+00:00:18,869 --> 00:00:23,410
+QuickStart Edition VMware image that we
+want you to use
+
+7
+00:00:23,410 --> 00:00:28,400
+you are going to have to login
+
+8
+00:00:28,400 --> 00:00:33,630
+with and IBM ID if you do not have
+
+9
+00:00:33,630 --> 00:00:37,579
+and IBM ID then you will go through the
+
+10
+00:00:37,579 --> 00:00:40,600
+registration process in order to
+
+11
+00:00:40,600 --> 00:00:44,399
+acquire one once you have set up
+
+12
+00:00:44,399 --> 00:00:47,890
+your IBM ID then
+
+13
+00:00:47,890 --> 00:00:51,850
+enter it in as well as the password
+
+14
+00:00:51,850 --> 00:00:58,140
+and click the Sign In button this will then
+take you
+
+15
+00:00:58,140 --> 00:01:02,910
+to a web page where you now have
+
+16
+00:01:02,910 --> 00:01:07,420
+access to VMware
+
+17
+00:01:07,420 --> 00:01:11,350
+images that you can use
+
+18
+00:01:11,350 --> 00:01:14,439
+now please choose
+
+19
+00:01:14,439 --> 00:01:17,770
+to download the cluster capable
+
+20
+00:01:17,770 --> 00:01:21,790
+VMware image and that is because
+
+21
+00:01:21,790 --> 00:01:25,880
+future exercises will require
+
+22
+00:01:25,880 --> 00:01:32,520
+this particular image those future
+exercises will not work
+
+23
+00:01:32,520 --> 00:01:36,549
+if you download the single node only
+
+24
+00:01:36,549 --> 00:01:42,130
+VMware image so select it click Continue
+
+25
+00:01:42,130 --> 00:01:46,259
+and you will then be asked
+
+26
+00:01:46,259 --> 00:01:51,799
+some questions about do you want to be
+contacted by IBM
+
+27
+00:01:51,799 --> 00:01:55,659
+you can say yes or no and
+
+28
+00:01:55,659 --> 00:01:58,890
+it's also going to specify that you have
+
+29
+00:01:58,890 --> 00:02:02,009
+agreed to the licensing
+
+30
+00:02:02,009 --> 00:02:06,719
+requirements specified by IBM check
+that
+
+31
+00:02:06,719 --> 00:02:09,729
+and then click the I confirm
+
+32
+00:02:09,729 --> 00:02:15,390
+push button the I confirm push button
+will then
+
+33
+00:02:15,390 --> 00:02:19,060
+take you to
+
+34
+00:02:19,060 --> 00:02:22,660
+the web page where you can actually
+
+35
+00:02:22,660 --> 00:02:26,980
+download your image and you've got
+
+36
+00:02:26,980 --> 00:02:33,970
+several options here if you're running
+on a Windows
+
+37
+00:02:33,970 --> 00:02:38,110
+system then you will select
+
+38
+00:02:38,110 --> 00:02:42,280
+that you want to download
+
+39
+00:02:42,280 --> 00:02:45,980
+the image that is in a VMDK
+
+40
+00:02:45,980 --> 00:02:49,810
+format I believe
+
+41
+00:02:49,810 --> 00:02:53,269
+that the OVF
+
+42
+00:02:53,269 --> 00:02:56,760
+format is for images
+
+43
+00:02:56,760 --> 00:03:00,239
+other than then the VMware
+
+44
+00:03:00,239 --> 00:03:03,409
+and if you'll notice it's in a
+
+45
+00:03:03,409 --> 00:03:09,129
+7z zipped format which means that you
+will need to
+
+46
+00:03:09,129 --> 00:03:12,959
+unzip it probably using
+
+47
+00:03:12,959 --> 00:03:16,830
+7-zip in order
+
+48
+00:03:16,830 --> 00:03:20,629
+to get it to a runnable situation so
+click
+
+49
+00:03:20,629 --> 00:03:27,629
+download now
+
+50
+00:03:31,920 --> 00:03:36,910
+specify whether you are going to allow or
+disallow the application
+
+51
+00:03:36,910 --> 00:03:39,960
+I'm going to allow it
+
+52
+00:03:39,960 --> 00:03:46,960
+and in my particular case
+
+53
+00:03:48,350 --> 00:03:52,440
+I have already downloaded this
+particular image
+
+54
+00:03:52,440 --> 00:03:58,500
+but you will then choose to actually
+download it
+
+55
+00:03:58,500 --> 00:04:01,860
+and once it gets to a hundred percent
+
+56
+00:04:01,860 --> 00:04:06,910
+then you're ready to use
+
+57
+00:04:06,910 --> 00:04:10,209
+something some program to extract
+
+58
+00:04:10,209 --> 00:04:15,180
+that zip file I'll close this out
+
+59
+00:04:15,180 --> 00:04:18,410
+and
+
+60
+00:04:18,410 --> 00:04:23,630
+close out my web
+
+61
+00:04:23,630 --> 00:04:28,460
+what I'm going to do now
+
+62
+00:04:28,460 --> 00:04:35,460
+is to bring up
+
+63
+00:04:42,150 --> 00:04:45,910
+and in my case I have actually
+downloaded both
+
+64
+00:04:45,910 --> 00:04:49,930
+of these images but we will then
+
+65
+00:04:49,930 --> 00:04:54,099
+use some some program like
+
+66
+00:04:54,099 --> 00:04:57,599
+7-zip my suggestion it's free
+
+67
+00:04:57,599 --> 00:05:01,129
+you can then go ahead and unzip
+
+68
+00:05:01,129 --> 00:05:04,409
+the file into the
+
+69
+00:05:04,409 --> 00:05:07,479
+various files require required by VMware
+
+70
+00:05:07,479 --> 00:05:10,990
+and extracted
+
+71
+00:05:10,990 --> 00:05:15,530
+to whatever particular location you want
+and then you can use
+
+72
+00:05:15,530 --> 00:05:18,639
+the VM Player or if you actually have
+
+73
+00:05:18,639 --> 00:05:24,460
+VMware Workstation installed you could
+use it but you can use VM Player
+
+74
+00:05:24,460 --> 00:05:27,699
+in order to run the image
+
+75
+00:05:27,699 --> 00:05:34,530
+so after you have
+
+76
+00:05:34,530 --> 00:05:37,919
+brought up your image go ahead
+
+77
+00:05:37,919 --> 00:05:42,139
+and power on the virtual machine
+
+78
+00:05:42,139 --> 00:05:49,139
+if you get this message which probably
+will just specify that you've copied it
+
+79
+00:05:50,050 --> 00:05:54,360
+and then it's going to go through
+
+80
+00:05:54,360 --> 00:06:01,360
+a boot up process
+
+81
+00:06:14,949 --> 00:06:17,110
+and eventually you'll be asked to
+
+82
+00:06:17,110 --> 00:06:24,110
+login you will login with root and the
+password
+
+83
+00:06:29,910 --> 00:06:36,910
+is password and then you're going to
+specify
+
+84
+00:06:41,759 --> 00:06:46,449
+your language Press F10
+
+85
+00:06:46,449 --> 00:06:52,630
+to continue and then you're going to be
+stepped through
+
+86
+00:06:52,630 --> 00:06:56,280
+a variety of panels
+
+87
+00:06:56,280 --> 00:07:00,190
+that are going to list out the licensing
+agreements
+
+88
+00:07:00,190 --> 00:07:03,940
+and just click Enter to
+
+89
+00:07:03,940 --> 00:07:09,389
+indicate that you understand and that
+you accept once again you're going to be
+
+90
+00:07:09,389 --> 00:07:10,789
+asked for
+
+91
+00:07:10,789 --> 00:07:16,039
+the password for root now this allows
+you to change root's password
+
+92
+00:07:16,039 --> 00:07:19,210
+please be aware that we assume
+
+93
+00:07:19,210 --> 00:07:22,570
+in our exercise instructions
+
+94
+00:07:22,570 --> 00:07:26,340
+that the password for root is still
+password
+
+95
+00:07:26,340 --> 00:07:32,310
+and then you will reconfirm it
+
+96
+00:07:32,310 --> 00:07:37,599
+the password
+
+97
+00:07:37,599 --> 00:07:41,009
+for biadmin we assume
+
+98
+00:07:41,009 --> 00:07:48,009
+is biadmin
+
+99
+00:07:50,940 --> 00:07:53,530
+and then your system will go through the
+process
+
+100
+00:07:53,530 --> 00:07:56,870
+of booting up and everything will
+
+101
+00:07:56,870 --> 00:07:59,810
+be ready for you start doing your
+exercises
+

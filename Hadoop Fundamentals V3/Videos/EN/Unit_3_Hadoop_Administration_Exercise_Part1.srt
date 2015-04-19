@@ -1,0 +1,295 @@
+1
+00:00:01,829 --> 00:00:03,050
+I'm going to do the steps
+
+2
+00:00:03,050 --> 00:00:06,310
+necessary now to and a new node
+
+3
+00:00:06,310 --> 00:00:10,570
+to my cluster originally I downloaded
+
+4
+00:00:10,570 --> 00:00:13,980
+the VMware image for the Quick Start edition
+
+5
+00:00:13,980 --> 00:00:18,539
+and that was used in the previous
+exercise
+
+6
+00:00:18,539 --> 00:00:22,490
+that image is going to be my master
+
+7
+00:00:22,490 --> 00:00:25,699
+image I merely have
+
+8
+00:00:25,699 --> 00:00:28,900
+unzipped to a new location
+
+9
+00:00:28,900 --> 00:00:32,820
+the image a second time and
+
+10
+00:00:32,820 --> 00:00:37,370
+this is going to become my child image
+so now I've got
+
+11
+00:00:37,370 --> 00:00:42,340
+two images I've gone through the same
+process of specifying the password for
+
+12
+00:00:42,340 --> 00:00:42,940
+root
+
+13
+00:00:42,940 --> 00:00:46,370
+and for biadmin I have booted both
+
+14
+00:00:46,370 --> 00:00:50,780
+of my images and since both images were
+created from
+
+15
+00:00:50,780 --> 00:00:54,829
+the same zip file they have the same
+
+16
+00:00:54,829 --> 00:00:58,660
+data which means I have
+
+17
+00:00:58,660 --> 00:01:02,320
+BigInsights installed on my
+
+18
+00:01:02,320 --> 00:01:07,170
+child image now for a node to be added
+to a cluster
+
+19
+00:01:07,170 --> 00:01:10,909
+it cannot have any BigInsights code
+installed on it
+
+20
+00:01:10,909 --> 00:01:14,470
+that gets created or installed during
+
+21
+00:01:14,470 --> 00:01:18,700
+the add node phase so what we're gonna
+have to do
+
+22
+00:01:18,700 --> 00:01:22,060
+is to correct that and we have
+
+23
+00:01:22,060 --> 00:01:25,820
+on this image that you've downloaded on
+our
+
+24
+00:01:25,820 --> 00:01:29,290
+desktop for biadmin we have this
+
+25
+00:01:29,290 --> 00:01:33,420
+Clean Local BI Icon
+
+26
+00:01:33,420 --> 00:01:37,270
+and we're just gonna go ahead and
+double-click that
+
+27
+00:01:37,270 --> 00:01:40,540
+and let the system get cleaned out
+
+28
+00:01:40,540 --> 00:01:44,799
+so now we have an image that
+doesn't have any
+
+29
+00:01:44,799 --> 00:01:48,540
+BigInsights code on it that we will be
+able to then use
+
+30
+00:01:48,540 --> 00:01:51,740
+to add a new node
+
+31
+00:01:51,740 --> 00:01:55,640
+to our cluster so I'm gonna go ahead and
+double-click this
+
+32
+00:01:55,640 --> 00:01:59,340
+I'm going to click enter to continue on
+
+33
+00:01:59,340 --> 00:02:03,450
+and this is going to run for a while and
+I'm going to
+
+34
+00:02:03,450 --> 00:02:06,729
+speed this up so that you don't have to
+waste all the time
+
+35
+00:02:06,729 --> 00:02:11,069
+doing this now once
+
+36
+00:02:11,069 --> 00:02:14,819
+the uninstall takes place you'll note
+
+37
+00:02:14,819 --> 00:02:18,200
+that we no longer have any icons
+
+38
+00:02:18,200 --> 00:02:22,900
+on our desktop referencing BigInsights
+
+39
+00:02:22,900 --> 00:02:29,000
+we don't have the start or stop BigInsights components we don't have the
+
+40
+00:02:29,000 --> 00:02:33,930
+icon that gets us to the up to the BigInsights console
+
+41
+00:02:33,930 --> 00:02:39,230
+since I began with two copies are the
+same image they both have the same
+
+42
+00:02:39,230 --> 00:02:40,390
+hostname
+
+43
+00:02:40,390 --> 00:02:44,800
+and I'm going to have to make some
+adjustments here on my child image
+
+44
+00:02:44,800 --> 00:02:48,040
+opening a command-line logging in
+
+45
+00:02:48,040 --> 00:02:51,110
+as root and I'm going to edit
+
+46
+00:02:51,110 --> 00:02:54,950
+/etc/hosts I'm gonna change my
+hostname
+
+47
+00:02:54,950 --> 00:02:58,280
+to bivm2.ibm.com
+
+48
+00:02:58,280 --> 00:03:03,280
+I'll also do that dynamically
+hostname
+
+49
+00:03:03,280 --> 00:03:08,470
+to bivm2.ibm.com and then we
+
+50
+00:03:08,470 --> 00:03:12,590
+will verify that the change took place
+it looks like it did
+
+51
+00:03:12,590 --> 00:03:18,349
+I need to get my IP addresses for both
+my child and my master
+
+52
+00:03:18,349 --> 00:03:21,420
+so I open a command line over on my master
+
+53
+00:03:21,420 --> 00:03:26,430
+switch to root do do an ifconfig
+to get my IP address there
+
+54
+00:03:26,430 --> 00:03:30,340
+because I need to update the
+
+55
+00:03:30,340 --> 00:03:34,510
+/etc/hosts file on both systems to
+make each
+
+56
+00:03:34,510 --> 00:03:39,290
+system know about the other one so on the
+child side
+
+57
+00:03:39,290 --> 00:03:42,970
+we'll edit our hosts file do a little bit
+
+58
+00:03:42,970 --> 00:03:49,970
+copying and pasting and I will make sure
+that the /etc file
+
+59
+00:03:51,049 --> 00:03:54,750
+is correct as far as the host name is
+concerned for the child
+
+60
+00:03:54,750 --> 00:03:58,299
+and that we are pointing to the master
+
+61
+00:03:58,299 --> 00:04:05,019
+as well save that they will go to the
+host side
+
+62
+00:04:05,019 --> 00:04:10,409
+it will do the same thing we will edit /etc/hosts
+
+63
+00:04:10,409 --> 00:04:13,739
+ 
+
+64
+00:04:13,739 --> 00:04:18,479
+and make sure that the master image
+
+65
+00:04:18,479 --> 00:04:25,479
+is aware of the child image
+
+66
+00:04:31,699 --> 00:04:34,620
+having done this I'll go ahead and exit
+out
+
+67
+00:04:34,620 --> 00:04:38,169
+of root and I am ready to continue
+

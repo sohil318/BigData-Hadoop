@@ -1,0 +1,37 @@
+Hadoop Fundamentals V3
+
+This course is designed to give you a basic understanding of Hadoop.  If first begins with
+describing what is Big Data and the need for Hadoop to be able to process that data in a 
+timely manner. This is followed by describing the Hadoop architecture and how to work with 
+the Hadoop Distributed File System (HDFS) both from the command line and using the BigInsights
+Console that is supplied with InfoSphere BigInsights.
+
+After describing Hadoop's architecture, Hadoop administration is covered. Here the course 
+covers adding and removing nodes from a Hadoop cluster, checking the amount of disk space 
+available on each node, and how to modify the various Hadoop configuration parameters. 
+
+The course ends with overviews of some of the other open source products using in a Hadoop 
+cluster. Only highlights are given about MapReduce, Pig, Jaql, Hive, Flume, Sqoop, and Oozie.
+There are other courses on the Big Data University that cover these products in more detail.
+
+What you should be able to do after completing this course:
+
+Describe Big Data
+Describe the Hadoop architecture
+Use the Hadoop file system shell and the BigInsights Console to:
+   Create directories in HDFS
+   Upload data from the local file system to HDFS
+   List data and directories in HDFS
+Start and stop the BigInsights components
+Add a new node to a Hadoop cluster 
+Remove a node from a hadoop Cluster
+Report as to how much space is available on each node in a Hadoop cluster
+Modify Hadoop configuration parameters
+Describe at a high level the use of:
+  MapReduce
+  Pig
+  Jaql
+  Hive
+  Flume
+  Sqoop
+  Oozie

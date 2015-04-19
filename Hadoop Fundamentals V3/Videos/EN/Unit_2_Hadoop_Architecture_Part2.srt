@@ -1,0 +1,355 @@
+1
+00:00:01,079 --> 00:00:07,560
+Hadoop 2.2 brought about architectural changes
+to MapReduce. As Hadoop has matured,
+
+2
+00:00:07,560 --> 00:00:13,549
+people have found that it can be used for
+more than running MapReduce jobs. But to
+
+3
+00:00:13,549 --> 00:00:18,529
+keep each new framework from having its own
+resource manager and scheduler, that
+
+4
+00:00:18,529 --> 00:00:23,660
+would compete with the other framework resource
+managers and schedulers, it was
+
+5
+00:00:23,660 --> 00:00:30,660
+decided to have the recourse manager and schedulers
+to be external to any framework.
+
+6
+00:00:31,619 --> 00:00:37,680
+This new architecture is called YARN. (Yet
+Another Resource Negotiator) . You still
+
+7
+00:00:37,680 --> 00:00:44,620
+have DataNodes but there are no longer TaskTrackers
+and the JobTracker.
+
+8
+00:00:44,620 --> 00:00:51,620
+You are not required to run YARN with Hadoop
+2.2. MapReduce V1 is still supported.
+
+9
+00:00:51,710 --> 00:00:58,210
+There are two main ideas with YARN.
+Provide generic scheduling and resource management.
+
+10
+00:00:58,210 --> 00:01:02,510
+This way Hadoop can support
+more than just MapReduce.
+
+11
+00:01:02,510 --> 00:01:08,150
+The other is to try to provide a more efficient
+scheduling and workload management.
+
+12
+00:01:08,150 --> 00:01:14,260
+With MapReduce V1, the administrator had to
+define how many map slots and how many
+
+13
+00:01:14,260 --> 00:01:20,830
+reduce slots there were on each node. Since
+the hardware capabilities for each node in
+
+14
+00:01:20,830 --> 00:01:24,920
+a
+Hadoop cluster can vary, for performance reasons,
+
+15
+00:01:24,920 --> 00:01:31,340
+you might want to limit the number of
+tasks on certain nodes. With YARN, this is
+
+16
+00:01:31,340 --> 00:01:36,510
+no longer required.
+With YARN, the resource manager is aware of
+
+17
+00:01:36,510 --> 00:01:42,290
+the capabilities of each node via
+communication with the NodeManager running
+
+18
+00:01:42,290 --> 00:01:49,290
+on each node. When an application gets
+invoked , an Application Master gets started.
+
+19
+00:01:50,090 --> 00:01:57,090
+The Application Master is then responsible
+for negotiating resourses from the ResourceManager.
+
+20
+00:01:57,790 --> 00:02:02,930
+These resources are assigned to
+Containers on each slave-node and you can
+
+21
+00:02:02,930 --> 00:02:09,930
+think that tasks then run in Containers. With
+this architecture, you are no long forced
+
+22
+00:02:10,810 --> 00:02:17,810
+into a one size fits all.
+The NameNode is a single point of failure.
+
+23
+00:02:20,030 --> 00:02:26,420
+Is there anything that can be done about that?
+Hadoop now supports high availability. In
+
+24
+00:02:26,420 --> 00:02:31,970
+this setup, there are now two NameNodes,
+one active and one standby.
+
+25
+00:02:31,970 --> 00:02:38,750
+Also, now there are JournalNodes. There must
+be at least three and there must be an odd
+
+26
+00:02:38,750 --> 00:02:45,459
+number. Only one of the NameNodes can be active
+at a time. It is the JournalNodes,
+
+27
+00:02:45,459 --> 00:02:51,330
+working together , that decide which of the
+NameNodes is to be the active one and if the
+
+28
+00:02:51,330 --> 00:02:58,330
+active NameNode has been lost and whether
+the backup NameNode should take over.
+
+29
+00:03:00,599 --> 00:03:06,810
+The NameNode loads the metadata for the file
+system into memory. This is the reason
+
+30
+00:03:06,810 --> 00:03:12,849
+that we said that NameNodes needed large amounts
+of RAM. But you are going to be
+
+31
+00:03:12,849 --> 00:03:19,190
+limited at some point when you use this vertical
+growth model. Hadoop Federation
+
+32
+00:03:19,190 --> 00:03:25,760
+allows you to grow your system horizontally.
+This setup also utilizes multiple
+
+33
+00:03:25,760 --> 00:03:32,459
+NameNodes. But they act independently. However,
+they do all share all of the
+
+34
+00:03:32,459 --> 00:03:39,459
+DataNodes. Each NameNode has its own namespace
+and therefore has control over its
+
+35
+00:03:40,250 --> 00:03:47,250
+own set of files. For example, one file that
+has blocks on DataNode 1 and DataNode 2
+
+36
+00:03:48,810 --> 00:03:55,810
+might be owned by NameNode 1. NameNode 2 might
+own a file that has blocks on
+
+37
+00:03:56,860 --> 00:04:03,860
+DataNode 2 and DataNode 3. And NameNode 3
+might have a file with blocks on all
+
+38
+00:04:03,910 --> 00:04:10,910
+three DataNodes.
+Hadoop has awareness of the topology of the
+
+39
+00:04:12,129 --> 00:04:17,509
+network. This allows it to optimize
+where it sends the computations to be applied
+
+40
+00:04:17,509 --> 00:04:24,509
+to the data. Placing the work as close
+as possible to the data it operates on maximizes
+
+41
+00:04:24,809 --> 00:04:31,809
+the bandwidth available for reading
+the data. In the diagram, the data we wish
+
+42
+00:04:32,539 --> 00:04:39,539
+to apply processing to is block B1, the
+dark blue rectangle on node n1 on rack 1.
+
+43
+00:04:43,379 --> 00:04:48,479
+When deciding which TaskTracker should receive
+a MapTask that reads data from
+
+44
+00:04:48,479 --> 00:04:55,479
+B1, the best option is to choose the TaskTracker
+that runs on the same node as the
+
+45
+00:04:56,099 --> 00:05:01,039
+data.
+If we can't place the computation on the same
+
+46
+00:05:01,039 --> 00:05:08,039
+node, our next best option is to place
+it on a node in the same rack as the data.
+
+47
+00:05:08,389 --> 00:05:13,520
+The worst case that Hadoop currently supports
+is when the computation must be
+
+48
+00:05:13,520 --> 00:05:20,400
+processed from a node in a different rack
+than the data. When rack-awareness is
+
+49
+00:05:20,400 --> 00:05:24,969
+configured for your cluster, Hadoop will always
+try to run the task on the
+
+50
+00:05:24,969 --> 00:05:31,969
+TaskTracker node with the highest bandwidth
+access to the data.
+
+51
+00:05:32,539 --> 00:05:38,119
+Let us walk through an example of how a file
+gets written to HDFS.
+
+52
+00:05:38,119 --> 00:05:44,900
+First, the client submits a "create" request
+to the NameNode. The NameNode checks
+
+53
+00:05:44,900 --> 00:05:51,900
+that the file does not already exist and the
+client has permission to write the file.
+
+54
+00:05:52,259 --> 00:05:57,569
+If that succeeds, the NameNode determines
+the DataNode to where the first block is to
+
+55
+00:05:57,569 --> 00:05:59,610
+be
+written.
+
+56
+00:05:59,610 --> 00:06:05,849
+If the client is running on a DataNode, it
+will try to place it there. Otherwise, it
+
+57
+00:06:05,849 --> 00:06:11,800
+chooses DataNode at random.
+By default, data is replicated to two other
+
+58
+00:06:11,800 --> 00:06:18,409
+places in the cluster. A pipeline is built
+between the three DataNodes that make up the
+
+59
+00:06:18,409 --> 00:06:24,520
+pipeline. The second DataNode is a
+randomly chosen node on a rack other than
+
+60
+00:06:24,520 --> 00:06:31,520
+that of the first replica of the block. This
+is to increase redundancy.
+
+61
+00:06:31,589 --> 00:06:37,069
+The final replica is placed on a random node
+within the same rack as the second
+
+62
+00:06:37,069 --> 00:06:44,069
+replica. The data is piped from the second
+DataNode to the third.
+
+63
+00:06:44,339 --> 00:06:49,809
+To ensure the write was successful before
+continuing, acknowledgment packets are
+
+64
+00:06:49,809 --> 00:06:56,809
+sent from the third DataNode to the second,
+From the second DataNode to the first
+
+65
+00:06:56,809 --> 00:07:03,399
+And from the first DataNode to the client
+This process occurs for each of the blocks
+
+66
+00:07:03,399 --> 00:07:09,119
+that makes up the file
+Notice that, for every block, by default,
+
+67
+00:07:09,119 --> 00:07:12,460
+there is a replica on at least two
+racks.
+
+68
+00:07:12,460 --> 00:07:18,360
+When the client is done writing to the DataNode
+pipeline and has received
+
+69
+00:07:18,360 --> 00:07:24,490
+acknowledgements, it tells the NameNode that
+the write has completed. The NameNode
+
+70
+00:07:24,490 --> 00:07:31,490
+then checks that the blocks are at least minimally
+replicated before responding.
+
+71
+00:07:32,080 --> 00:07:34,409
+This lesson continues with the next video
+in this unit.
+

@@ -1,0 +1,250 @@
+﻿1
+00:00:02,659 --> 00:00:09,659
+Welcome to the unit on Hadoop Administration.
+The agenda covers adding nodes to a cluster,
+
+2
+00:00:10,660 --> 00:00:13,820
+verifying the health of a cluster, and stopping
+/
+
+3
+00:00:13,820 --> 00:00:20,720
+starting components. Then the unit covers
+configuring Hadoop and setting up rack topology.
+
+4
+00:00:20,720 --> 00:00:26,580
+Let’s begin with adding and removing nodes
+from a cluster.
+
+5
+00:00:26,580 --> 00:00:32,730
+Adding nodes can be performed from the BigInsights
+Console or the command line. To do so
+
+6
+00:00:32,730 --> 00:00:39,410
+requires either the ip address or hostname
+of the node to be added. The node to be added
+
+7
+00:00:39,410 --> 00:00:42,500
+must
+also be reachable. And as a matter of fact,
+
+8
+00:00:42,500 --> 00:00:46,219
+it works both ways. The master and child nodes
+must
+
+9
+00:00:46,219 --> 00:00:51,390
+all be able to communicate with each other.
+In this case, a child node refers to the node
+
+10
+00:00:51,390 --> 00:00:55,719
+that is
+being added. It may not have BigInsights already
+
+11
+00:00:55,719 --> 00:00:59,180
+installed on it. When the node is added to
+a
+
+12
+00:00:59,180 --> 00:01:06,180
+cluster, the BigInsights code is transferred
+to the new node and installed.
+
+13
+00:01:06,310 --> 00:01:13,310
+From the BigInsights Console you use the Cluster
+Status tab and, on the left side, select Nodes.
+
+14
+00:01:13,970 --> 00:01:19,440
+You then click the Add nodes pushbutton.
+You are then presented with a dialog that
+
+15
+00:01:19,440 --> 00:01:23,330
+allows you to specify one or more nodes to
+be added.
+
+16
+00:01:23,330 --> 00:01:30,330
+You may type in ip address, hostnames or any
+combination thereof. You can even specify
+
+17
+00:01:30,610 --> 00:01:34,220
+an
+ipaddress range or a regular expression with
+
+18
+00:01:34,220 --> 00:01:41,220
+your hostname. In the example, child5.ibm.com,
+child6.ibm.com, etc would be added.
+
+19
+00:01:46,229 --> 00:01:53,229
+Once the nodes have been added, you define
+which services are to be hosted on those nodes.
+
+20
+00:01:53,590 --> 00:01:55,920
+You
+can select multiple services for one or more
+
+21
+00:01:55,920 --> 00:02:02,470
+nodes.
+Services can also be removed from a node.
+
+22
+00:02:02,470 --> 00:02:04,500
+As a matter of fact, if you are using the
+BigInsights
+
+23
+00:02:04,500 --> 00:02:10,880
+Console to remove a node, you must first remove
+all services from that node. Depending on
+
+24
+00:02:10,880 --> 00:02:17,880
+which services are running on a node, you
+select which are to be removed.
+
+25
+00:02:19,380 --> 00:02:25,590
+When there are no services running on a node,
+it can be removed using the BigInsights Console.
+
+26
+00:02:25,590 --> 00:02:30,840
+All that we just said about adding and removing
+nodes can also be done from the command line.
+
+27
+00:02:30,840 --> 00:02:37,840
+You use the addnode.sh script to add one or
+more nodes. Once again, either ipaddresses
+
+28
+00:02:38,870 --> 00:02:43,030
+or
+hostname can be specified. You also specify
+
+29
+00:02:43,030 --> 00:02:47,630
+which services are to run on the new nodes.
+In the
+
+30
+00:02:47,630 --> 00:02:53,040
+example, the hadoop service was specified.
+This means that the node will be used for
+
+31
+00:02:53,040 --> 00:02:57,350
+a
+DataNode and TaskTracker.
+
+32
+00:02:57,350 --> 00:03:03,490
+Listnode.sh displays all of the nodes in the
+cluster and which services are running on
+
+33
+00:03:03,490 --> 00:03:05,770
+those
+nodes.
+
+34
+00:03:05,770 --> 00:03:12,770
+You can remove a service from a node using
+the removenode.sh script and you can remove
+
+35
+00:03:13,260 --> 00:03:18,430
+a
+node using that same script. In this case,
+
+36
+00:03:18,430 --> 00:03:25,430
+you can remove a node even though it has services
+running. Maybe not the best idea, but it is
+
+37
+00:03:25,630 --> 00:03:29,010
+doable. At least you are prompted whether
+to
+
+38
+00:03:29,010 --> 00:03:35,700
+continue.
+Next let us discuss verifying the heath of
+
+39
+00:03:35,700 --> 00:03:39,340
+your cluster. You are able to view all of
+the nodes in
+
+40
+00:03:39,340 --> 00:03:46,340
+the cluster, see the status of each node and
+which services are running on each node.
+
+41
+00:03:47,180 --> 00:03:54,180
+From the command line you can run the DFS
+Disk Check report . This lets you see how
+
+42
+00:03:54,540 --> 00:03:58,510
+much
+space is still available on each DataNode.
+
+43
+00:03:58,510 --> 00:04:05,510
+Next let us look at start and stopping components
+and services.
+
+44
+00:04:08,670 --> 00:04:14,530
+You may in order to save some resources, you
+only want to start a subset of the Hadoop
+
+45
+00:04:14,530 --> 00:04:21,530
+components . From the command line you can
+run the start.sh script and specify one or
+
+46
+00:04:21,570 --> 00:04:25,490
+more
+components that are to be started. If you
+
+47
+00:04:25,490 --> 00:04:30,470
+want to start all components, then you can
+execute startall.
+
+48
+00:04:30,470 --> 00:04:37,470
+sh. Likewise, you can stop a subset of running
+components and if you want stop all
+
+49
+00:04:39,310 --> 00:04:46,310
+components, execute stop-all.sh.
+You also have the option of starting and stopping
+
+50
+00:04:48,060 --> 00:04:55,060
+components using the BigInsights Console.
+Please continue to the next part of this presentation.
+
